@@ -1,32 +1,25 @@
 #!/usr/bin/env bash
 
+PROJECTPATH="projects/${1}"
+DISTPATH="dist/${1}"
+
 # bump the version
-cd projects/ngx-route-utils
+cd $PROJECTPATH
 VERSION="$(npm version patch)"
 cd ../..
 
+echo "Publishing ${1} version ${VERSION}..."
+
 # build the lib
-ng build ngx-route-utils --prod
-cp README.md LICENSE dist/ngx-route-utils/
+ng build $1 --prod
 
 # publish to NPM
-cd dist/ngx-route-utils
+cd $DISTPATH
 npm publish --access public
 cd ../..
 
 
 
-# build the demo
-# ng build --aot --prod --base-href /ngx-route-utils/
-
-# write the version to the demo...
-# echo "${VERSION}" >> docs/VERSION
-
-
-
-# commit with tag
+# commit
 git add -A
-git commit -m "published version ${VERSION} to npm"
-git tag  $VERSION
-git push
-git push --tags
+git commit -m "published ${1} version ${VERSION} to npm"
