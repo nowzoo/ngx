@@ -23,12 +23,19 @@ export class AppModule { }
 ```
 
 
+## NgxRouteUtils
+Static helper methods.
+
+- `urlFromRoute(route: ActivatedRoute | ActivatedRouteSnapshot): string` Given a route or snapshot, returns the full URL starting with `/`
+
+
 ## NgxSignInRedirectService
 Stores a redirect url as a string in session storage for use once the user is signed in.
 
 ### API
 - `redirect: string|null`
-- `redirectOnSignIn(defaultRedirect = '/'): Promise<boolean>` Navigates to the stored redirect, and sets the strored redirect to null. If no stored redirect exists, navigates to `defaultRedirect`
+- `setRedirect(val: string|ActivatedRoute|ActivatedRouteSnapshot)`
+- `redirectOnSignIn(defaultRedirect = '/'): Promise<boolean>` Navigates to the stored redirect, and sets the stored redirect to null. If no stored redirect exists, navigates to `defaultRedirect`
 
 ### Usage
 ```ts
@@ -41,7 +48,7 @@ export class SomeGuardedRouteComponent implements OnInit {
   )
   ngOnInit() {
     if (! this.auth.signedIn) {
-      this.redirectService.redirect = this.router.url;
+      this.redirectService.setRedirect(this.router.url);
       this.router.navigate(['/sign-in']);
     }
   }

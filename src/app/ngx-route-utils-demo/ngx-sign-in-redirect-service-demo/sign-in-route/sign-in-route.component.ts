@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { NgxSignInRedirectService } from '@nowzoo/ngx-route-utils';
-
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-sign-in-route',
   templateUrl: './sign-in-route.component.html',
@@ -10,6 +10,7 @@ import { NgxSignInRedirectService } from '@nowzoo/ngx-route-utils';
 export class SignInRouteComponent implements OnInit {
 
   constructor(
+    private route: ActivatedRoute,
     private authService: AuthService,
     private redirectService: NgxSignInRedirectService
   ) { }
@@ -19,7 +20,7 @@ export class SignInRouteComponent implements OnInit {
 
   signIn() {
     this.authService.signIn();
-    this.redirectService.redirectOnSignIn('/ngx-route-utils/ngx-sign-in-redirect-service');
+    this.redirectService.redirectOnSignIn(this.route.snapshot.parent);
   }
 
 }

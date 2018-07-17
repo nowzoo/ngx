@@ -25,7 +25,7 @@ export class GuardedRouteComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(val => {
         if (! val) {
-          this.redirectService.redirect = this.router.url;
+          this.redirectService.setRedirect(this.route);
           this.router.navigate(['../sign-in'], {relativeTo: this.route});
         }
       });
