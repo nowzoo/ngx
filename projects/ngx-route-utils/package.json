@@ -1,0 +1,17 @@
+{
+	"name": "@nowzoo/ngx-route-utils",
+	"version": "0.0.16",
+	"peerDependencies": {
+		"@angular/common": "^6.0.0-rc.0 || ^6.0.0",
+		"@angular/core": "^6.0.0-rc.0 || ^6.0.0",
+		"@angular/router": "^6.0.3"
+	},
+	"description": "Angular router utilities",
+	"homepage": "https://github.com/nowzoo/ngx/blob/master/projects/ngx-route-utils/README.md",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/nowzoo/ngx.git"
+	},
+	"bugs": "https://github.com/nowzoo/ngx/issues"
+}
