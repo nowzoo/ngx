@@ -3,11 +3,11 @@ import { AuthService } from '../auth.service';
 import { NgxSignInRedirectService } from '@nowzoo/ngx-route-utils';
 
 @Component({
-  selector: 'app-sign-in',
-  templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.css']
+  selector: 'app-sign-in-route',
+  templateUrl: './sign-in-route.component.html',
+  styleUrls: ['./sign-in-route.component.scss']
 })
-export class SignInComponent implements OnInit {
+export class SignInRouteComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
@@ -19,7 +19,7 @@ export class SignInComponent implements OnInit {
 
   signIn() {
     this.authService.signIn();
-    this.redirectService.redirectOnSignIn('/route-utils');
+    this.redirectService.redirectOnSignIn('/ngx-route-utils/ngx-sign-in-redirect-service');
   }
 
 }

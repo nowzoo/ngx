@@ -14,8 +14,8 @@ import { IndexRouteComponent } from './index-route/index-route.component';
 
 
 const routes: Routes = [
-  {path: 'ngx-fire', loadChildren: './ngx-fire/ngx-fire-demo.module#NgxFireDemoModule'},
-  {path: 'route-utils', loadChildren: './route-utils/route-utils.module#RouteUtilsModule'},
+  {path: 'ngx-fire', loadChildren: './ngx-fire-demo/ngx-fire-demo.module#NgxFireDemoModule'},
+  {path: 'ngx-route-utils', loadChildren: './ngx-route-utils-demo/ngx-route-utils-demo.module#NgxRouteUtilsDemoModule'},
   {path: '', component: IndexRouteComponent}
 ];
 @NgModule({

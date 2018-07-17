@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RouteUtilsRouteComponent } from './route-utils-route.component';
+import { ContainerRouteComponent } from './container-route.component';
 
-describe('RouteUtilsRouteComponent', () => {
-  let component: RouteUtilsRouteComponent;
-  let fixture: ComponentFixture<RouteUtilsRouteComponent>;
+describe('ContainerRouteComponent', () => {
+  let component: ContainerRouteComponent;
+  let fixture: ComponentFixture<ContainerRouteComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RouteUtilsRouteComponent ]
+      declarations: [ ContainerRouteComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RouteUtilsRouteComponent);
+    fixture = TestBed.createComponent(ContainerRouteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
