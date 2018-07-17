@@ -22,6 +22,12 @@
 			],
 			"@nowzoo/ngx-route-utils/*": [
 				"dist/ngx-route-utils/*"
+			],
+			"@nowzoo/ngx-fire": [
+				"dist/ngx-fire"
+			],
+			"@nowzoo/ngx-fire/*": [
+				"dist/ngx-fire/*"
 			]
 		}
 	}
