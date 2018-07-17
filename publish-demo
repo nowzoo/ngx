@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+# build the app
+ng build --aot --prod --base-href /ngx-fire/
+
+git add -A
+git commit -m "demo app"
+
+# bump the version
+VERSION="$(npm version patch)"
+
+
+echo "Publishing demos version ${VERSION}..."
+
+
+
+# # publish to NPM
+# cd $DISTPATH
+# npm publish --access public
+# cd ../..
+#
+#
+#
+# # commit
+# git add -A
+# git commit -m "published ${1} version ${VERSION} to npm"
