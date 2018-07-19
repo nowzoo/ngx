@@ -12,8 +12,11 @@ import { NgxRouteUtilsModule } from '@nowzoo/ngx-route-utils';
 import { AppComponent } from './app.component';
 import { IndexRouteComponent } from './index-route/index-route.component';
 
+import { NgxAppMsgModule } from '@nowzoo/ngx-app-msg';
+
 
 const routes: Routes = [
+  {path: 'ngx-app-msg', loadChildren: './ngx-app-msg-demo/ngx-app-msg-demo.module#NgxAppMsgDemoModule'},
   {path: 'ngx-form', loadChildren: './ngx-form-demo/ngx-form-demo.module#NgxFormDemoModule'},
   {path: 'ngx-fire', loadChildren: './ngx-fire-demo/ngx-fire-demo.module#NgxFireDemoModule'},
   {path: 'ngx-route-utils', loadChildren: './ngx-route-utils-demo/ngx-route-utils-demo.module#NgxRouteUtilsDemoModule'},
@@ -31,6 +34,7 @@ const routes: Routes = [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    NgxAppMsgModule
   ],
   providers: [],
   bootstrap: [AppComponent]

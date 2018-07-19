@@ -34,6 +34,12 @@
 			],
 			"@nowzoo/ngx-form/*": [
 				"dist/ngx-form/*"
+			],
+			"@nowzoo/ngx-app-msg": [
+				"dist/ngx-app-msg"
+			],
+			"@nowzoo/ngx-app-msg/*": [
+				"dist/ngx-app-msg/*"
 			]
 		}
 	}

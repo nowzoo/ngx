@@ -1,0 +1,17 @@
+.ngx-app-msg-container {
+  position: fixed;
+  z-index: 50000;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  transform: translateY(-100%);
+  transition: transform 250ms;
+  &.visible {
+    transform: translateY(0%);
+  }
+  >.alert {
+    width: 300px;
+    margin: 20px auto;
+  }
+}

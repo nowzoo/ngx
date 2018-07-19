@@ -1,0 +1,23 @@
+<div class="ngx-app-msg-container" [class.visible]="shown">
+  <div
+    class="alert"
+    [class.alert-info]="'wait' === context"
+    [class.alert-warning]="'warn' === context"
+    [class.alert-success]="'success' === context"
+    role="alert"
+    [attr.aria-hidden]="!shown">
+    <div class="d-flex align-items-center">
+      <div class="mr-1">
+        <i class="fas fa-fw fa-2x"
+          [class.fa-spin]="'wait' === context"
+          [class.fa-spinner]="'wait' === context"
+          [class.fa-exclamation-triangle]="'warn' === context"
+          [class.fa-check]="'success' === context"
+          aria-hidden="true"></i>
+      </div>
+      <div>
+        {{message}}
+      </div>
+    </div>
+  </div>
+</div>

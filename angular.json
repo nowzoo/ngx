@@ -251,6 +251,46 @@
           }
         }
       }
+    },
+    "ngx-app-msg": {
+      "root": "projects/ngx-app-msg",
+      "sourceRoot": "projects/ngx-app-msg/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-app-msg/tsconfig.lib.json",
+            "project": "projects/ngx-app-msg/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/ngx-app-msg/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-app-msg/src/test.ts",
+            "tsConfig": "projects/ngx-app-msg/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-app-msg/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-app-msg/tsconfig.lib.json",
+              "projects/ngx-app-msg/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ngx"
