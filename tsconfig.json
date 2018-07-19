@@ -40,6 +40,12 @@
 			],
 			"@nowzoo/ngx-app-msg/*": [
 				"dist/ngx-app-msg/*"
+			],
+			"@nowzoo/ngx-window-title": [
+				"dist/ngx-window-title"
+			],
+			"@nowzoo/ngx-window-title/*": [
+				"dist/ngx-window-title/*"
 			]
 		}
 	}
