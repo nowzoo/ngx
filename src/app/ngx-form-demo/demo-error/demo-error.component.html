@@ -1,0 +1,76 @@
+<section class="demo">
+  <h2>NgxFormUtils.showInvalid() and NgxFormErrorComponent</h2>
+  <p>
+    Use <code>NgxFormUtils.showInvalid(control, invalidOn?)</code> to
+    figure out whether to display a class.
+  </p>
+  <p>Display control errors by key with the NgxFormErrorComponent:
+    <code>&lt;ngx-form-error [control]="myFc" key="myKey"&gt;...&lt;/ngx-form-error&gt;</code>
+  </p>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label [attr.for]="formId + '-touched'">Email</label>
+        <input
+          [attr.id]="formId + '-touched'"
+          type="text"
+          [formControl]="fcTouched"
+          class="form-control"
+          [class.is-invalid]="showInvalid(fcTouched)">
+          <ngx-form-error [control]="fcTouched" key="required">Required.</ngx-form-error>
+          <ngx-form-error [control]="fcTouched" key="email">Invalid email.</ngx-form-error>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="alert alert-info">
+        By default, errors are only displayed if the control is touched, that is, after the
+        control has been blurred by the user.
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label [attr.for]="formId + '-dirty'">Email (show errors when dirty)</label>
+        <input
+          [attr.id]="formId + '-dirty'"
+          type="text"
+          [formControl]="fcDirty"
+          class="form-control"
+          [class.is-invalid]="showInvalid(fcDirty, 'dirty')">
+          <ngx-form-error [control]="fcDirty" key="required" invalidOn="dirty">Required.</ngx-form-error>
+          <ngx-form-error [control]="fcDirty" key="email" invalidOn="dirty">Invalid email.</ngx-form-error>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="alert alert-info">
+        Use <code>invalidOn="dirty"</code> to display errors whenever the control is dirty.
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label [attr.for]="formId + '-always'">Email (show errors always)</label>
+        <input
+          [attr.id]="formId + '-always'"
+          type="text"
+          [formControl]="fcAlways"
+          class="form-control"
+          [class.is-invalid]="showInvalid(fcAlways, 'always')">
+          <ngx-form-error [control]="fcAlways" key="required" invalidOn="always">Required.</ngx-form-error>
+          <ngx-form-error [control]="fcAlways" key="email" invalidOn="always">Invalid email.</ngx-form-error>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="alert alert-info">
+        Use <code>invalidOn="always"</code> to display errors no matter what.
+      </div>
+    </div>
+  </div>
+
+</section>

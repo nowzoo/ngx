@@ -1,0 +1,35 @@
+
+
+<div class="form-group">
+  <label [attr.for]="formId + '-touched'">Email (show errors when touched: default)</label>
+  <input
+    [attr.id]="formId + '-touched'"
+    type="text"
+    [formControl]="fcTouched"
+    class="form-control"
+    [class.is-invalid]="fcTouched.invalid && fcTouched.touched">
+    <ngx-form-error [control]="fcTouched" key="required">Required.</ngx-form-error>
+    <ngx-form-error [control]="fcTouched" key="email">Invalid email.</ngx-form-error>
+</div>
+<div class="form-group">
+  <label [attr.for]="formId + '-dirty'">Email (show errors when dirty)</label>
+  <input
+    [attr.id]="formId + '-dirty'"
+    type="text"
+    [formControl]="fcDirty"
+    class="form-control"
+    [class.is-invalid]="fcDirty.invalid && fcDirty.dirty">
+    <ngx-form-error [control]="fcDirty" key="required" invalidOn="dirty">Required.</ngx-form-error>
+    <ngx-form-error [control]="fcDirty" key="email" invalidOn="dirty">Invalid email.</ngx-form-error>
+</div>
+<div class="form-group">
+  <label [attr.for]="formId + '-always'">Email (show errors always)</label>
+  <input
+    [attr.id]="formId + '-always'"
+    type="text"
+    [formControl]="fcAlways"
+    class="form-control"
+    [class.is-invalid]="fcAlways.invalid">
+    <ngx-form-error [control]="fcAlways" key="required" invalidOn="always">Required.</ngx-form-error>
+    <ngx-form-error [control]="fcAlways" key="email" invalidOn="always">Invalid email.</ngx-form-error>
+</div>

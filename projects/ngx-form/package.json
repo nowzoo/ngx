@@ -1,0 +1,17 @@
+{
+	"name": "@nowzoo/ngx-form",
+	"version": "0.0.1",
+	"peerDependencies": {
+		"@angular/common": "^6.0.0-rc.0 || ^6.0.0",
+		"@angular/core": "^6.0.0-rc.0 || ^6.0.0",
+		"@angular/forms": "^6.0.3"
+	},
+	"description": "Small utilities and error components for Angular Reactive forms",
+	"homepage": "https://github.com/nowzoo/ngx/blob/master/projects/ngx-form/README.md",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/nowzoo/ngx.git"
+	},
+	"bugs": "https://github.com/nowzoo/ngx/issues"
+}
