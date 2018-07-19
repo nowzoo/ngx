@@ -29,8 +29,8 @@ export class NgxFormUtils {
       return false;
     }
     switch (invalidOn) {
-      case NgxFormInvalidOn.always: return true;
-      case NgxFormInvalidOn.dirty: return control.dirty;
+      case 'always': return true;
+      case 'dirty': return control.dirty;
       default: return control.touched;
     }
   }

@@ -43,7 +43,7 @@ describe('Utils', () => {
       control.setErrors({foo: true});
       expect(control.touched).toBe(false);
       expect(control.dirty).toBe(false);
-      expect(NgxFormUtils.showInvalid(control, NgxFormInvalidOn.always)).toBe(true);
+      expect(NgxFormUtils.showInvalid(control, 'always')).toBe(true);
     });
     it('should return true if the control is invalid && dirty and invalidOn = dirty', () => {
       const control = new FormControl();
@@ -51,7 +51,7 @@ describe('Utils', () => {
       control.markAsDirty();
       expect(control.touched).toBe(false);
       expect(control.dirty).toBe(true);
-      expect(NgxFormUtils.showInvalid(control, NgxFormInvalidOn.dirty)).toBe(true);
+      expect(NgxFormUtils.showInvalid(control, 'dirty')).toBe(true);
     });
     it('should return false if the control is invalid && not dirty and invalidOn = dirty', () => {
       const control = new FormControl();
@@ -59,7 +59,7 @@ describe('Utils', () => {
       control.markAsPristine();
       expect(control.touched).toBe(false);
       expect(control.dirty).toBe(false);
-      expect(NgxFormUtils.showInvalid(control, NgxFormInvalidOn.dirty)).toBe(false);
+      expect(NgxFormUtils.showInvalid(control, 'dirty')).toBe(false);
     });
     it('should return true if the control is invalid && touched and invalidOn = touched', () => {
       const control = new FormControl();
@@ -67,7 +67,7 @@ describe('Utils', () => {
       control.markAsTouched();
       expect(control.touched).toBe(true);
       expect(control.dirty).toBe(false);
-      expect(NgxFormUtils.showInvalid(control, NgxFormInvalidOn.touched)).toBe(true);
+      expect(NgxFormUtils.showInvalid(control, 'touched')).toBe(true);
     });
     it('should return false if the control is invalid && not touched and invalidOn = touched', () => {
       const control = new FormControl();
@@ -75,7 +75,7 @@ describe('Utils', () => {
       control.markAsUntouched();
       expect(control.touched).toBe(false);
       expect(control.dirty).toBe(false);
-      expect(NgxFormUtils.showInvalid(control, NgxFormInvalidOn.touched)).toBe(false);
+      expect(NgxFormUtils.showInvalid(control, 'touched')).toBe(false);
     });
   });
   describe('showInvalidKey(control: AbstractControl, key: string, invalidOn?: NgxFormInvalidOn)', () => {

@@ -10,6 +10,6 @@ import { NgxFormUtils } from '../utils';
 export class NgxFormErrorComponent {
   @Input() control: AbstractControl;
   @Input() key: string;
-  @Input() invalidOn: NgxFormInvalidOn = NgxFormInvalidOn.touched;
+  @Input() invalidOn: NgxFormInvalidOn = 'touched';
   showInvalidKey = NgxFormUtils.showInvalidKey;
 }

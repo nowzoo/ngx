@@ -1,5 +1,1 @@
-export enum NgxFormInvalidOn {
-  always = 'always',
-  touched = 'touched',
-  dirty = 'dirty'
-}
+export type NgxFormInvalidOn = 'always'|'dirty'|'touched';
