@@ -1,4 +1,4 @@
-import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 
 export class NgxRouteUtils {
   static urlFromRoute(route: ActivatedRoute | ActivatedRouteSnapshot): string {
@@ -13,5 +13,15 @@ export class NgxRouteUtils {
       return s.length > 0;
     });
     return '/' + nonempty.join('/');
+  }
+
+  static currentRouteSnapshots(router: Router): ActivatedRouteSnapshot[] {
+    let routeSnapshot: ActivatedRouteSnapshot = router.routerState.root.snapshot;
+    const snapshots: ActivatedRouteSnapshot[] = [];
+    while (routeSnapshot) {
+      snapshots.push(routeSnapshot);
+      routeSnapshot = routeSnapshot.children[0];
+    }
+    return snapshots;
   }
 }

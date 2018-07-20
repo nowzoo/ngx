@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { Router, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
-import { NgxRouteUtils } from './utils';
+import { NgxRouteUtils } from '../utils';
 
 import { NgxSignInRedirectService } from './sign-in-redirect.service';
 

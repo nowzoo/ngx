@@ -22,22 +22,25 @@ import { NgxRouteUtilsModule } from '@nowzoo/ngx-route-utils';
 export class AppModule { }
 ```
 
+## Route Utilities
 
-## NgxRouteUtils
-Static helper methods.
+### NgxRouteUtils
+A class with static helper methods for dealing with activated routes and router state.
 
+#### API
 - `urlFromRoute(route: ActivatedRoute | ActivatedRouteSnapshot): string` Given a route or snapshot, returns the full URL starting with `/`
+- `static currentRouteSnapshots(router: Router): ActivatedRouteSnapshot[]` Returns an array of the first child route snapshots, from the root down.
 
-
-## NgxSignInRedirectService
+## Sign In Redirect
+### NgxSignInRedirectService
 Stores a redirect url as a string in session storage for use once the user is signed in.
 
-### API
+#### API
 - `redirect: string|null`
 - `setRedirect(val: string|ActivatedRoute|ActivatedRouteSnapshot)`
 - `redirectOnSignIn(defaultRedirect = '/'): Promise<boolean>` Navigates to the stored redirect, and sets the stored redirect to null. If no stored redirect exists, navigates to `defaultRedirect`
 
-### Usage
+#### Usage
 ```ts
 export class SomeGuardedRouteComponent implements OnInit {
 
@@ -69,6 +72,78 @@ export class SignInRouteComponent implements OnInit {
 
 }
 ```
+## Window Title
+### NgxWindowTitleService
+Stores an application title and a route title, and sets the window title when one or both are changed.
+
+#### API
+
+- `appTitle: string|null` Getter/setter. On set, updates the window title.
+- `routeTitle: string|null` Getter/setter. On set, updates the window title.
+- `fullTitle: string` Getter. The full title, i.e.: the route title if set, the separator, the app title if set.
+
+By default the separator string is `' | '`. You can change this in your app module by providing another string for `NGX_WINDOW_TITLE_SEPARATOR`, for example:
+
+```ts
+import { NgxWindowTitleModule, NGX_WINDOW_TITLE_SEPARATOR } from '@nowzoo/ngx-route-utils';
+// etc...
+@NgModule({
+
+  imports: [
+    NgxRouteUtilsModule.forRoot(),
+  ],
+  providers: [
+    {provide: NGX_WINDOW_TITLE_SEPARATOR, useValue: ' - '}
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+//
+```
+
+#### Usage
+
+```ts
+export class AppComponent implements OnInit {
+  constructor(
+    private windowTitleService: NgxWindowTitleService
+  ) {}
+
+  ngOnInit() {
+    this.windowTitleService.appTitle = 'My App';
+  }
+}
+
+export class SignInRouteComponent implements OnInit {
+  constructor(
+    private windowTitleService: NgxWindowTitleService
+  ) {}
+
+  ngOnInit() {
+    this.windowTitleService.routeTitle = 'Sign In';
+    // window title is now "Sign In | My App"
+  }
+}
+```
+## Breadcrumbs
+### NgxRouteBreadcrumbsService
+Stores an observable of an array of route breadcrumbs. You can use the service directly, or use the provided `NgxRouteBreadcrumbsComponent` (see below.)
+
+#### API
+
+- `breadcrumbs: Observable<INgxRouteBreadcrumb[]>`
+- `registerBreadcrumb(route: ActivatedRoute|ActivatedRouteSnapshot, title: string)` Registers a breadcrumb.
+
+#### Interface: `INgxRouteBreadcrumb`
+
+- `url: string`
+- `title: string`
+
+### NgxRouteBreadcrumbsComponent
+
+A "dumb" component that displays the current breadcrumbs in the Bootstrap breadcrumb format.
+
+Selector: `ngx-route-breadcrumbs`
 
 ## Contributing
 Contributions and suggestions are welcome.

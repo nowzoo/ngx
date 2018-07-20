@@ -39,4 +39,15 @@ describe('Utils', () => {
     });
 
   });
+
+  describe('currentRouteSnapshots(router)', () => {
+    it('should get return all the route snaphots in order', () => {
+      const childSnap = {children: []};
+      const parentSnap = {children: [childSnap]};
+      const grandparentSnap = {children: [parentSnap]};
+      const rootSnap = {children: [grandparentSnap]};
+      const router: any = {routerState: {root: {snapshot: rootSnap}}};
+      expect(NgxRouteUtils.currentRouteSnapshots(router)).toEqual([rootSnap, grandparentSnap, parentSnap, childSnap] as any[]);
+    });
+  });
 });

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
-import { NgxRouteUtils } from './utils';
+import { NgxRouteUtils } from '../utils';
 @Injectable({
   providedIn: 'root'
 })
