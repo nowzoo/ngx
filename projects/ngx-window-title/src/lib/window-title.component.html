@@ -1,0 +1,8 @@
+<div style="display: none" aria-hidden="true">
+  <div #app (cdkObserveContent)="onContentChange()" [debounce]="20">
+    <ng-container *ngTemplateOutlet="appTemplate"></ng-container>
+  </div>
+  <div #route (cdkObserveContent)="onContentChange()" [debounce]="20">
+    <ng-container *ngTemplateOutlet="appTemplate"></ng-container>
+  </div>
+</div>

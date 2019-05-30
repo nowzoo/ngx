@@ -1,51 +1,100 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
 import { NgxWindowTitleService } from './ngx-window-title.service';
-import { Title } from '@angular/platform-browser';
-import { NGX_WINDOW_TITLE_SEPARATOR } from './separator';
+import { IWindowTitle } from 'ngx-crumbs/lib/api';
+import { ActivatedRoute } from '@angular/router';
+import { NgxRouteUtils } from '@nowzoo/ngx-route-utils';
+import { WindowTitleContext } from './api';
+import { take } from 'rxjs/operators';
 
 describe('NgxWindowTitleService', () => {
-
   let service: NgxWindowTitleService;
-  let title;
   beforeEach(() => {
-    title = {setTitle: jasmine.createSpy()};
-    TestBed.configureTestingModule({
-      providers: [
-        NgxWindowTitleService,
-        {provide: Title, useValue: title},
-        {provide: NGX_WINDOW_TITLE_SEPARATOR, useValue: ' | '}
-      ]
-    });
-    service = TestBed.get(NgxWindowTitleService);
+    TestBed.configureTestingModule({});
+    service =  TestBed.get(NgxWindowTitleService);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+  it('should have windowTitles$', () => {
+    expect(service.windowTitles$).toBeTruthy();
+  });
 
-  it('should include both app and route titles if both are truthy', () => {
-    service.appTitle = 'app';
-    service.routeTitle = 'route';
-    expect(service.fullTitle).toBe('route | app');
-    expect(title.setTitle).toHaveBeenCalledWith(service.fullTitle);
-    expect(service.appTitle).toBe('app');
-    expect(service.routeTitle).toBe('route');
+  describe('_sortRecs', () => {
+    it('should ', () => {
+      const recs: any[] = [
+        {url: ['/', 'foo']},
+        {url: ['/', 'foo', 'bar']},
+        {url: ['/']},
+      ];
+      const sorted = service._sortRecs(recs as any);
+      expect(sorted[0].url).toEqual(['/']);
+      expect(sorted[2].url).toEqual(['/', 'foo', 'bar']);
+    });
   });
-  it('should include just the app title if only that is truthy', () => {
-    service.appTitle = 'app';
-    service.routeTitle = '';
-    expect(service.fullTitle).toBe('app');
-    expect(title.setTitle).toHaveBeenCalledWith(service.fullTitle);
-    expect(service.appTitle).toBe('app');
-    expect(service.routeTitle).toBe('');
+
+  describe('setWindowTitle(route: ActivatedRoute, templateRef: TemplateRef<any>, context: WindowTitleContext)', () => {
+    let route: ActivatedRoute;
+    let templateRef: any;
+    let getSnapshotRouterLinkSpy: jasmine.Spy;
+    let _updateWindowTitlesSpy: jasmine.Spy;
+    let windowTitles: IWindowTitle[];
+    beforeEach(() => {
+      route = new ActivatedRoute();
+      templateRef = {};
+      getSnapshotRouterLinkSpy = spyOn(NgxRouteUtils, 'getSnapshotRouterLink').and.callFake(() => ['/', 'foo']);
+      _updateWindowTitlesSpy = spyOn(service, '_updateWindowTitles').and.callThrough();
+      service.windowTitles$.subscribe(v => windowTitles = v);
+    });
+    it('should call NgxRouteUtils.getSnapshotRouterLink(route)', () => {
+      service.setWindowTitle(route, templateRef, WindowTitleContext.app);
+      expect(getSnapshotRouterLinkSpy).toHaveBeenCalledWith(route);
+    });
+    it('should add the entry', () => {
+      service.setWindowTitle(route, templateRef, WindowTitleContext.app);
+      expect(windowTitles[0]).toEqual({
+        context: WindowTitleContext.app,
+        templateRef,
+        route,
+        url: ['/', 'foo']
+      });
+    });
+    it('should call service._updateWindowTitles()', () => {
+      service.setWindowTitle(route, templateRef, WindowTitleContext.app);
+      expect(_updateWindowTitlesSpy).toHaveBeenCalledWith();
+    });
+
   });
-  it('should include just the route title if only that is truthy', () => {
-    service.appTitle = '';
-    service.routeTitle = 'route';
-    expect(service.fullTitle).toBe('route');
-    expect(title.setTitle).toHaveBeenCalledWith(service.fullTitle);
-    expect(service.appTitle).toBe('');
-    expect(service.routeTitle).toBe('route');
+  describe('removeWindowTitle(route: ActivatedRoute)', () => {
+    let route: ActivatedRoute;
+    let templateRef: any;
+    let getSnapshotRouterLinkSpy: jasmine.Spy;
+    let _updateWindowTitlesSpy: jasmine.Spy;
+    let windowTitles: IWindowTitle[];
+    beforeEach(() => {
+      route = new ActivatedRoute();
+      templateRef = {};
+      getSnapshotRouterLinkSpy = spyOn(NgxRouteUtils, 'getSnapshotRouterLink').and.callFake(() => ['/', 'foo']);
+      _updateWindowTitlesSpy = spyOn(service, '_updateWindowTitles').and.callThrough();
+      service.windowTitles$.subscribe(v => windowTitles = v);
+      service.setWindowTitle(route, templateRef, WindowTitleContext.app);
+      expect(windowTitles[0]).toEqual({
+        context: WindowTitleContext.app,
+        templateRef,
+        route,
+        url: ['/', 'foo']
+      });
+    });
+
+    it('should remove the entry', () => {
+      service.removeWindowTitle(route);
+      expect(windowTitles[0]).toBeUndefined();
+    });
+    it('should call service._updateWindowTitles()', () => {
+      service.removeWindowTitle(route);
+      expect(_updateWindowTitlesSpy).toHaveBeenCalledWith();
+    });
+
   });
 });

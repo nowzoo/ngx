@@ -1,0 +1,21 @@
+{
+	"name": "@nowzoo/ngx-crumbs",
+  "version": "8.0.0",
+  "description": "Declarative route breadcrumbs for Angular.",
+  "keywords": ["angular", "router", "breadcrumbs"],
+  "homepage": "https://github.com/nowzoo/ngx/blob/master/projects/ngx-crumbs/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nowzoo/ngx"
+  },
+  "bugs": {
+    "url": "https://github.com/nowzoo/ngx/issues"
+  },
+  "license": "MIT",
+	"peerDependencies": {
+    "@angular/common": ">=6.0.0 <9",
+    "@angular/core": ">=6.0.0 <9",
+    "@angular/router": ">=6.0.0 <9",
+    "@nowzoo/ngx-route-utils": ">=8.0.0"
+  }
+}

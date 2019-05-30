@@ -1,0 +1,21 @@
+{
+  "name": "@nowzoo/ngx-sign-in-redirect",
+  "version": "8.0.0",
+  "description": "A service for handling sign in redirects in Angular.",
+  "keywords": ["angular", "router", "redirect"],
+  "homepage": "https://github.com/nowzoo/ngx/blob/master/projects/ngx-sign-in-redirect/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nowzoo/ngx"
+  },
+  "bugs": {
+    "url": "https://github.com/nowzoo/ngx/issues"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": ">=6.0.0 <9",
+    "@angular/core": ">=6.0.0 <9",
+    "@angular/router": ">=6.0.0 <9",
+    "@nowzoo/ngx-route-utils": ">=8.0.0"
+  }
+}

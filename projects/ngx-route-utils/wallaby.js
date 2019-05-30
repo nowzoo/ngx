@@ -1,11 +1,16 @@
 var wallabyWebpack = require('wallaby-webpack');
 var path = require('path');
 
-var compilerOptions = require('./tsconfig.wallaby.spec.json').compilerOptions;
-
+var compilerOptions = Object.assign(
+  // require('./tsconfig.lib.json').compilerOptions,
+  require('./tsconfig.spec.json').compilerOptions,
+  {
+    emitDecoratorMetadata: true,
+    experimentalDecorators: true
+  }
+);
 compilerOptions.module = 'CommonJs';
 module.exports = function (wallaby) {
-
   var webpackPostprocessor = wallabyWebpack({
     entryPatterns: [
       'src/wallabyTest.js',

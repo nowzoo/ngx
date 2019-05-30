@@ -1,16 +1,22 @@
 {
-	"name": "@nowzoo/ngx-window-title",
-	"version": "0.0.2",
-	"peerDependencies": {
-		"@angular/common": "^6.0.0-rc.0 || ^6.0.0",
-		"@angular/core": "^6.0.0-rc.0 || ^6.0.0"
-	},
-	"description": "Need to put a description",
-	"homepage": "https://github.com/nowzoo/ngx/blob/master/projects/ngx-window-title/README.md",
-	"license": "MIT",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/nowzoo/ngx.git"
-	},
-	"bugs": "https://github.com/nowzoo/ngx/issues"
+  "name": "@nowzoo/ngx-window-title",
+  "version": "8.0.0",
+  "description": "Declarative window titles for angular routes.",
+  "keywords": ["angular", "router", "window title"],
+  "homepage": "https://github.com/nowzoo/ngx/blob/master/projects/ngx-window-title/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nowzoo/ngx"
+  },
+  "bugs": {
+    "url": "https://github.com/nowzoo/ngx/issues"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": ">=6.0.0 <9",
+    "@angular/core": ">=6.0.0 <9",
+    "@angular/router": ">=6.0.0 <9",
+    "@angular/cdk": ">=6.0.0 <9",
+    "@nowzoo/ngx-route-utils": ">=8.0.0"
+  }
 }

@@ -1,21 +1,30 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
+import { ObserversModule } from '@angular/cdk/observers';
+
+import { WindowTitleComponent } from './window-title.component';
+import { WindowTitleDirective } from './window-title.directive';
+import { CommonModule } from '@angular/common';
 import { NgxWindowTitleService } from './ngx-window-title.service';
-import { NGX_WINDOW_TITLE_SEPARATOR } from './separator';
 
 @NgModule({
-  imports: [
+  declarations: [
+    WindowTitleComponent,
+    WindowTitleDirective
   ],
-  declarations: [],
-  exports: [],
+  imports: [
+    CommonModule,
+    ObserversModule
+  ],
+  exports: [
+    WindowTitleComponent,
+    WindowTitleDirective
+  ]
 })
 export class NgxWindowTitleModule {
-  public static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders {
     return {
       ngModule: NgxWindowTitleModule,
-      providers: [
-        NgxWindowTitleService,
-        {provide: NGX_WINDOW_TITLE_SEPARATOR, useValue: ' | '}
-      ]
+      providers: [NgxWindowTitleService]
     };
   }
 }

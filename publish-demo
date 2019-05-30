@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-# build the app
-ng build --aot --prod --base-href /ngx/
-git add -A
-git commit -m "demo app"
-VERSION="$(npm version patch)"
-echo "Publishing demos version ${VERSION}..."
-git push origin master

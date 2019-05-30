@@ -1,52 +1,54 @@
 {
-	"compileOnSave": false,
-	"compilerOptions": {
-		"baseUrl": "./",
-		"outDir": "./dist/out-tsc",
-		"sourceMap": true,
-		"declaration": false,
-		"moduleResolution": "node",
-		"emitDecoratorMetadata": true,
-		"experimentalDecorators": true,
-		"target": "es5",
-		"typeRoots": [
-			"node_modules/@types"
-		],
-		"lib": [
-			"es2017",
-			"dom"
-		],
-		"paths": {
-			"@nowzoo/ngx-route-utils": [
-				"dist/ngx-route-utils"
-			],
-			"@nowzoo/ngx-route-utils/*": [
-				"dist/ngx-route-utils/*"
-			],
-			"@nowzoo/ngx-fire": [
-				"dist/ngx-fire"
-			],
-			"@nowzoo/ngx-fire/*": [
-				"dist/ngx-fire/*"
-			],
-			"@nowzoo/ngx-form": [
-				"dist/ngx-form"
-			],
-			"@nowzoo/ngx-form/*": [
-				"dist/ngx-form/*"
-			],
-			"@nowzoo/ngx-app-msg": [
-				"dist/ngx-app-msg"
-			],
-			"@nowzoo/ngx-app-msg/*": [
-				"dist/ngx-app-msg/*"
-			],
-			"@nowzoo/ngx-window-title": [
-				"dist/ngx-window-title"
-			],
-			"@nowzoo/ngx-window-title/*": [
-				"dist/ngx-window-title/*"
-			]
-		}
-	}
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "module": "es2015",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "ngx-crumbs": [
+        "dist/ngx-crumbs"
+      ],
+      "ngx-crumbs/*": [
+        "dist/ngx-crumbs/*"
+      ],
+      "ngx-fire": [
+        "dist/ngx-fire"
+      ],
+      "ngx-fire/*": [
+        "dist/ngx-fire/*"
+      ],
+      "ngx-window-title": [
+        "dist/ngx-window-title"
+      ],
+      "ngx-window-title/*": [
+        "dist/ngx-window-title/*"
+      ],
+      "@nowzoo/ngx-route-utils": [
+        "dist/ngx-route-utils"
+      ],
+      "@nowzoo/ngx-route-utils/*": [
+        "dist/ngx-route-utils/*"
+      ],
+      "ngx-sign-in-redirect": [
+        "dist/ngx-sign-in-redirect"
+      ],
+      "ngx-sign-in-redirect/*": [
+        "dist/ngx-sign-in-redirect/*"
+      ]
+    }
+  }
 }

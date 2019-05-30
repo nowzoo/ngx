@@ -1,54 +1,92 @@
 # @nowzoo/ngx-window-title
 
+Declarative, directive-based window titles for Angular.
 
-[Demo Site](https://nowzoo.github.io/ngx/ngx-window-title) | [Demo Code](https://github.com/nowzoo/ngx/tree/master/src/app/ngx-window-title)
+## Getting Started
 
-## Install
-```bash
-npm i @nowzoo/ngx-window-title --save
+Install the library and its dependencies...
+```bash 
+npm i -S @nowzoo/ngx-window-title @angular/cdk  @nowzoo/ngx-route-utils
+```
+
+Import the module into the module where you want to begin creating window titles. In most cases this should probably be the top level `AppModule` module, but suit yourself.
+```ts
+import { NgxWindowTitleModule } from '@nowzoo/ngx-window-title';
+@NgModule({
+  imports: [
+    NgxWindowTitleModule.forRoot(),
+    //...
+  ],
+  //...
+})
+export class AppModule { }
 ```
 
 
+First, add a `WindowTitleComponent` in your root component's HTML. This component is hidden. It handles updating the window title based on the templates that show up later in your routes.
 
-## Quick Start
+```html
+<!-- app.component.html -->
+<ngx-window-title></ngx-window-title>
+```
+Then, place window title directives in your route components' html. There are two "contexts" --
+`app` and `route`; corresponding to the position in the title. By default, the `route` title comes first. You **must** pass one of these to the directive in order for the directive to have effect. 
 
-TKTK
+```html
+<ng-template ngxWindowTitle context="app">My Great App</ng-template>
+```
+
+```html
+<!-- some subordinate route -->
+<ng-template ngxWindowTitle context="route">Profile</ng-template>
+```
+
+With the above, the route title would be `Profile | My Great App`.
+
+You can add dynamic titles.
+```html
+<ng-template ngxWindowTitle context="route">{{foo.title}}</ng-template>
+```
+
+
 
 ## API
 
-TKTK
+### Enum `WindowContext`
 
-## Contributing
-Contributions and suggestions are welcome.
+- `app = 'app'`
+- `route = 'route'`
 
-Get started...
-```bash
-git clone git@github.com:nowzoo/ngx.git
-cd ngx
-npm i
-ng build ngx-window-title --prod
-```
+### Interface `IWindowTitle`
 
-The library code is found in `projects/ngx-window-title`.
+ - `templateRef: TemplateRef<any>` The template reference to which the directive belongs. Use this to output the HTML for the breadcrumb.
+ - `route: ActivatedRoute` The route in which the `CrumbDirective` appeared.
+ - `url: string[]` The full Angular "routerLink" of the breadcrumb as an array, starting at the root with `'/'`.
+ - `context: WindowContext`
 
-The demo site code is in `src/app/ngx-window-title`.
 
-This library was built with the Angular CLI, so...
+### Service `NgxWindowTitleService`
+Use this to implement your own method of updating the window title if you don't want to use `WindowTitleComponent`.
+- `windowTitles$: Observable<IWindowTitle[]>` 
 
-```bash
-# test the library...
-ng test ngx-window-title
+### Directive `WindowTitleDirective`
 
-# build the library...
-ng build ngx-window-title --prod
+Place these in your routes' HTML. Note that you have to use the directive with an `ng-template`, like this: `<ng-template ngxWindowTitle context="app>Foo</ng-template>`.
 
-# serve the demo site locally...
-ng serve
-```
+- Selector: `[ngxWindowTitle]` 
+- Inputs
+    - `context: WindowContext` Required.
 
-Note that changes to the library code **are not** automatically reflected in the locally-served demo site. You must run `ng build ngx-window-title` whenever you make changes to the library. But the local server does watch for changes to the built library -- so you don't need to restart the server.
+### Component `WindowTitleComponent`
 
-If you use [Wallaby](https://wallabyjs.com/) to run unit tests, select the `projects/ngx-window-title/wallaby.js` as your config file.
+The hidden component that takes care of updating the title.
 
-## License
-[MIT](https://github.com/nowzoo/ngx/projects/ngx-window-title/blob/master/LICENSE)
+- Selector: `ngx-window-title`
+- Inputs
+    - `separator: string` Optional. Default: `' | '`
+    - `appFirst: boolean` Optional. Default: `false`. If `true` the `app` route title will appear first.
+
+
+## Development
+
+See the [README](https://github.com/nowzoo/ngx) at the root of the repo for info on installation and testing.

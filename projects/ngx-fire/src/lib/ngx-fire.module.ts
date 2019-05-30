@@ -1,19 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { NgxFireArrayDirective } from './array.directive';
-import { NgxFireControlDirective } from './control.directive';
+import { NgxFireComponent } from './ngx-fire.component';
 
 @NgModule({
+  declarations: [NgxFireComponent],
   imports: [
-    CommonModule
   ],
-  declarations: [
-    NgxFireArrayDirective,
-    NgxFireControlDirective,
-  ],
-  exports: [
-    NgxFireArrayDirective,
-    NgxFireControlDirective,
-  ]
+  exports: [NgxFireComponent]
 })
 export class NgxFireModule { }
