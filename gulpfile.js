@@ -52,6 +52,22 @@ gulp.task('build:ngx-fire',  (cb) => {
   buildLib('ngx-fire', cb);
 });
 
+gulp.task('build:ngx-form',  (cb) => {
+  buildLib('ngx-form', cb);
+});
+
+gulp.task('build:ngx-message',  (cb) => {
+  buildLib('ngx-message', cb);
+});
+
+gulp.task('build:ngx-list',  (cb) => {
+  buildLib('ngx-list', cb);
+});
+
+gulp.task('build:ngx-firebase-auth',  (cb) => {
+  buildLib('ngx-firebase-auth', cb);
+});
+
 
 
 gulp.task('cov', () => {

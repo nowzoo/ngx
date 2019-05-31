@@ -1,0 +1,154 @@
+<div class="ngx-firebase-auth-container" [ngSwitch]="screen">
+
+  <div class="ngx-firebase-auth-screen" *ngSwitchCase="SCREEN.wait">
+    <ngx-firebase-auth-wait></ngx-firebase-auth-wait>
+  </div>
+
+  <div class="ngx-firebase-auth-screen" *ngSwitchCase="SCREEN.form">
+    <form [formGroup]="fg" (ngSubmit)="submit()">
+      <div class="form-group">
+        <label [attr.for]="id + 'email'">Email</label>
+        <input
+          [attr.id]="id + 'email'"
+          [attr.aria-describedby]="id + 'email-help'"
+          type="email"
+          formControlName="email"
+          class="form-control"
+          placeholder="Your email address"
+          [class.is-invalid]="emailFc.touched && emailFc.invalid">
+        <small [attr.id]="id + 'email-help'" class="form-text text-muted">
+          To get started enter your email address.
+          If you don’t have an account, we’ll create one for you.
+        </small>
+        <div class="invalid-feedback d-block"
+          *ngIf="emailFc.touched && emailFc.hasError('required')">
+          Required.
+        </div>
+        <div class="invalid-feedback d-block"
+          *ngIf="emailFc.touched && (emailFc.hasError('email') || emailFc.hasError('auth/invalid-email'))">
+          Invalid email.
+        </div>
+      </div><!-- class="form-group" email -->
+
+      <div class="form-group">
+        <label [attr.for]="id + 'password'">
+          <span *ngIf="accountResult.exists">Password</span>
+          <span *ngIf="!accountResult.exists">Choose Password</span>
+        </label>
+        <ngx-firebase-auth-password-wrapper>
+          <input
+            #wrappedPasswordInput
+            [attr.id]="id + 'password'"
+            [attr.aria-describedby]="id + 'password-help'"
+            type="password"
+            formControlName="password"
+            class="form-control"
+            [class.is-invalid]="passwordFc.touched && passwordFc.invalid"
+            [attr.placeholder]="accountResult.exists ? 'Password' : 'Choose Password'">
+        </ngx-firebase-auth-password-wrapper>
+        <small *ngIf="accountResult.status==='fetched'" [attr.id]="id + 'password-help'" class="form-text text-muted">
+          <span *ngIf="accountResult.exists">
+            <span *ngIf="accountResult.hasPassword">
+              Enter the password for {{emailFc.value}}. Forgot?
+              <a href="#" (click)="$event.preventDefault(); sendResetPasswordLink()">Reset password</a>.
+              You can also
+              <a href="#" (click)="$event.preventDefault(); sendSignInLink()">
+                sign in with a link</a>.
+            </span>
+            <span *ngIf="!accountResult.hasPassword">
+              You haven’t yet created a password for this account.
+              Please
+              <a href="#" (click)="$event.preventDefault(); sendSignInLink()">
+                sign in with a link</a>, or
+              <a href="#" (click)="$event.preventDefault(); sendResetPasswordLink()">
+                create a password</a>.
+            </span>
+          </span><!-- *ngIf="accountResult.exists" -->
+          <span *ngIf="!accountResult.exists">
+            Please choose a strong password.
+          </span>
+        </small>
+        <div
+          class="invalid-feedback d-block"
+          *ngIf="passwordFc.touched && passwordFc.hasError('required')">
+          Required.
+        </div>
+        <div
+          class="invalid-feedback d-block"
+          *ngIf="passwordFc.touched && passwordFc.hasError('auth/wrong-password')">
+          Wrong password.
+        </div>
+        <div
+          class="invalid-feedback d-block"
+          *ngIf="passwordFc.touched && passwordFc.hasError('auth/weak-password')">
+          That password is too weak. Please choose a stronger one.
+        </div>
+      </div><!-- class="form-group" password -->
+
+      <div class="form-group">
+        <ngx-firebase-auth-persistence-control></ngx-firebase-auth-persistence-control>
+      </div>
+      
+      <div class="form-group">
+        <button
+          type="submit"
+          class="btn btn-primary btn-block"
+          [disabled]="submitting || fg.invalid">
+          <i class="fas fa-fw fa-sign-in" aria-hidden="true"></i>
+          <span *ngIf="accountResult.exists">
+            Sign In
+          </span>
+          <span *ngIf="!accountResult.exists">
+            Sign Up
+          </span>
+        </button>
+      </div><!-- class="form-group" submit -->
+
+
+    </form>
+  </div><!-- class="ngx-firebase-auth-screen" *ngSwitchCase="SCREEN.form" -->
+
+  <div class="ngx-firebase-auth-screen" *ngSwitchCase="SCREEN.signInSuccess">
+    <ngx-firebase-auth-success header="Welcome!">
+      <p class="mb-0">
+        Welcome, {{credential.user.displayName}}. You’re signed in.
+      </p>
+    </ngx-firebase-auth-success>
+  </div><!-- class="ngx-firebase-auth-screen" *ngSwitchCase="SCREEN.signInSuccess" -->
+
+  <div class="ngx-firebase-auth-screen" *ngSwitchCase="SCREEN.resetPasswordLinkSuccess">
+    <ngx-firebase-auth-success header="Check Your Inbox">
+      <p class="mb-0">
+        We’ve set a password reset link to you at {{emailFc.value}}.
+      </p>
+    </ngx-firebase-auth-success>
+    <p class="text-muted">
+      Please allow a few moments for the email to arrive.
+      <a href="#" (click)="$event.preventDefault(); sendResetPasswordLink()">Resend Email</a>
+      |
+      <a href="#" (click)="$event.preventDefault(); reset()">Go Back</a>
+    </p>
+
+  </div><!-- class="ngx-firebase-auth-screen" *ngSwitchCase="SCREEN.resetPasswordLinkSuccess" -->
+
+  <div class="ngx-firebase-auth-screen" *ngSwitchCase="SCREEN.signInLinkSuccess">
+    <ngx-firebase-auth-success header="Check Your Inbox">
+      <p class="mb-0">
+        We’ve set a sign in link to you at {{emailFc.value}}.
+      </p>
+    </ngx-firebase-auth-success>
+    <p class="text-muted">
+      Please allow a few moments for the email to arrive.
+      <a href="#" (click)="$event.preventDefault(); sendSignInLink()">Resend Email</a>
+      |
+      <a href="#" (click)="$event.preventDefault(); reset()">Go Back</a>
+    </p>
+
+  </div><!-- class="ngx-firebase-auth-screen" *ngSwitchCase="SCREEN.signInLinkSuccess" -->
+
+
+
+  <div class="ngx-firebase-auth-screen" *ngSwitchCase="SCREEN.error">
+    <ngx-firebase-auth-error [error]="error"></ngx-firebase-auth-error>
+  </div><!-- class="ngx-firebase-auth-screen" *ngSwitchCase="'error'" -->
+</div>

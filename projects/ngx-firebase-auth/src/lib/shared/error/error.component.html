@@ -1,0 +1,32 @@
+<div class="alert alert-danger" role="alert">
+  <h5>
+    <i class="fas fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
+    Woops! An error occurred!
+  </h5>
+  <p class="mb-0">
+    <ng-container [ngSwitch]="error.code">
+      <span *ngSwitchCase="'ngx-firebase-auth/sign-in-required'">
+        {{error.message}}
+      </span>
+      <span *ngSwitchCase="'auth/expired-action-code'">
+        The link you used
+        has expired.
+      </span>
+      <span *ngSwitchCase="'auth/invalid-action-code'">
+        The link you used
+        has already been used.
+      </span>
+      <span *ngSwitchCase="'auth/user-disabled'">
+        The user account associated with that link
+        has been disabled.
+      </span>
+      <span *ngSwitchCase="'auth/user-not-found'">
+        The user account associated with that link
+        has been removed.
+      </span>
+      <span *ngSwitchDefault>
+        Unhandled error. Code: {{error.code}}
+      </span>
+    </ng-container>
+  </p>
+</div>

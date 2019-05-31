@@ -1,8 +1,20 @@
 {
-  "name": "ngx-form",
-  "version": "0.0.1",
-  "peerDependencies": {
-    "@angular/common": "^8.0.0",
-    "@angular/core": "^8.0.0"
+	"name": "@nowzoo/ngx-form",
+  "version": "8.0.0",
+  "description": "Control validity directives and components for Angular forms.",
+  "keywords": ["angular", "form", "control"],
+  "homepage": "https://github.com/nowzoo/ngx/blob/master/projects/ngx-form/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nowzoo/ngx"
+  },
+  "bugs": {
+    "url": "https://github.com/nowzoo/ngx/issues"
+  },
+  "license": "MIT",
+	"peerDependencies": {
+    "@angular/common": ">=6.0.0 <9",
+    "@angular/core": ">=6.0.0 <9",
+    "@angular/forms": ">=6.0.0 <9"
   }
 }

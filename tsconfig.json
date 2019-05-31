@@ -54,6 +54,30 @@
       ],
       "ngx-form/*": [
         "dist/ngx-form/*"
+      ],
+      "ngx-message": [
+        "dist/ngx-message"
+      ],
+      "ngx-message/*": [
+        "dist/ngx-message/*"
+      ],
+      "ngx-list": [
+        "dist/ngx-list"
+      ],
+      "ngx-list/*": [
+        "dist/ngx-list/*"
+      ],
+      "ngx-firebase-auth": [
+        "dist/ngx-firebase-auth"
+      ],
+      "ngx-firebase-auth/*": [
+        "dist/ngx-firebase-auth/*"
+      ],
+      "ngx-date-time-inputs": [
+        "dist/ngx-date-time-inputs"
+      ],
+      "ngx-date-time-inputs/*": [
+        "dist/ngx-date-time-inputs/*"
       ]
     }
   }

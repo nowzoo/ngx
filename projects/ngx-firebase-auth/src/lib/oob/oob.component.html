@@ -1,0 +1,39 @@
+<div class="ngx-firebase-auth-container" [ngSwitch]="screen">
+
+  <div class="ngx-firebase-auth-screen" *ngSwitchCase="SCREEN.wait">
+    <ngx-firebase-auth-wait></ngx-firebase-auth-wait>
+  </div>
+
+  <div class="ngx-firebase-auth-screen" *ngSwitchCase="SCREEN.resetPassword">
+    <ngx-firebase-auth-oob-reset-password
+      [oobCode]="paramOobCode"
+      [actionCodeInfo]="actionCodeInfo"
+      (success$)="onSuccess($event)"
+      (error$)="onError($event)"></ngx-firebase-auth-oob-reset-password>
+  </div>
+  <div class="ngx-firebase-auth-screen" *ngSwitchCase="SCREEN.recoverEmail">
+    <ngx-firebase-auth-oob-recover-email
+      [oobCode]="paramOobCode"
+      [actionCodeInfo]="actionCodeInfo"
+      (success$)="onSuccess($event)"
+      (error$)="onError($event)"></ngx-firebase-auth-oob-recover-email>
+  </div>
+  <div class="ngx-firebase-auth-screen" *ngSwitchCase="SCREEN.signIn">
+    <ngx-firebase-auth-oob-sign-in
+      [oobCode]="paramOobCode"
+      [actionCodeInfo]="actionCodeInfo"
+      (success$)="onSuccess($event)"
+      (error$)="onError($event)"></ngx-firebase-auth-oob-sign-in>
+  </div>
+  <div class="ngx-firebase-auth-screen" *ngSwitchCase="SCREEN.verifyEmail">
+    <ngx-firebase-auth-oob-verify-email
+      [oobCode]="paramOobCode"
+      [actionCodeInfo]="actionCodeInfo"
+      (success$)="onSuccess($event)"
+      (error$)="onError($event)"></ngx-firebase-auth-oob-verify-email>
+  </div>
+  <div class="ngx-firebase-auth-screen" *ngSwitchCase="SCREEN.error">
+    <ngx-firebase-auth-error [error]="error"></ngx-firebase-auth-error>
+  </div> <!-- class="ngx-firebase-auth-screen" *ngSwitchCase="SCREEN.error" -->
+
+</div>

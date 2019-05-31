@@ -1,0 +1,19 @@
+{
+  "name": "@nowzoo/ngx-list",
+  "version": "8.0.0",
+  "description": "Paginated, sorted and filtered lists from observables for Angular. The base library is agnostic as to styling and controls; a  set of Bootstrap 4 controls is available as a separately imported module.",
+  "keywords": ["angular", "list", "pagination", "sort"],
+  "homepage": "https://github.com/nowzoo/ngx/blob/master/projects/ngx-list/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nowzoo/ngx"
+  },
+  "bugs": {
+    "url": "https://github.com/nowzoo/ngx/issues"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": ">=6.0.0 <9",
+    "@angular/core": ">=6.0.0 <9"
+  }
+}

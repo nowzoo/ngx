@@ -1,0 +1,58 @@
+<div class="ngx-firebase-auth-container" [ngSwitch]="screen">
+
+  <div class="ngx-firebase-auth-screen" *ngSwitchCase="SCREEN.wait">
+    <ngx-firebase-auth-wait></ngx-firebase-auth-wait>
+  </div> <!-- class="ngx-firebase-auth-screen" *ngSwitchCase="SCREEN.wait" -->
+
+  <div class="ngx-firebase-auth-screen" *ngSwitchCase="SCREEN.form">
+    <form [formGroup]="fg" (ngSubmit)="submit()">
+      <div class="form-group">
+        <label [attr.for]="id + 'email'">Email</label>
+        <input
+          [attr.id]="id + 'email'"
+          [attr.aria-describedby]="id + 'email-help'"
+          placeholder="Email Address"
+          type="email"
+          class="form-control"
+          [class.is-invalid]="emailFc.invalid && emailFc.dirty"
+          formControlName="email">
+        <small [attr.id]="id + 'email-help'" class="form-text text-muted">
+          You are signing in with a link.
+          Enter the email address to which this sign in link was sent.
+        </small>
+        <div class="invalid-feedback d-block"
+          *ngIf="emailFc.dirty && emailFc.hasError('required')">
+          Required.
+        </div>
+        <div class="invalid-feedback d-block"
+          *ngIf="emailFc.dirty && (emailFc.hasError('auth/invalid-email') || emailFc.hasError('email'))">
+          Invalid email.
+        </div>
+      </div>
+      <div class="form-group">
+        <ngx-firebase-auth-persistence-control></ngx-firebase-auth-persistence-control>
+      </div>
+      <div class="form-group text-right">
+        <button
+          type="submit"
+          class="btn btn-primary">
+           Sign In
+        </button>
+      </div>
+    </form>
+
+  </div> <!-- class="ngx-firebase-auth-screen" *ngSwitchCase="SCREEN.form" -->
+
+  <div class="ngx-firebase-auth-screen" *ngSwitchCase="SCREEN.success">
+    <ngx-firebase-auth-success header="Welcome">
+      <p class="mb-0">
+        You’re signed in.
+      </p>
+    </ngx-firebase-auth-success>
+  </div> <!-- class="ngx-firebase-auth-screen" *ngSwitchCase="SCREEN.success" -->
+
+  <div class="ngx-firebase-auth-screen" *ngSwitchCase="SCREEN.error">
+    <ngx-firebase-auth-error [error]="error"></ngx-firebase-auth-error>
+  </div> <!-- class="ngx-firebase-auth-screen" *ngSwitchCase="SCREEN.error" -->
+
+</div>
