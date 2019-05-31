@@ -48,6 +48,12 @@ gulp.task('build:ngx-sign-in-redirect',  (cb) => {
   buildLib('ngx-sign-in-redirect', cb);
 });
 
+gulp.task('build:ngx-fire',  (cb) => {
+  buildLib('ngx-fire', cb);
+});
+
+
+
 gulp.task('cov', () => {
   const browserSync = require('browser-sync').create();
 
@@ -57,6 +63,6 @@ gulp.task('cov', () => {
       baseDir: './coverage',
       directory: true
     },
-});
+  });
 
 })

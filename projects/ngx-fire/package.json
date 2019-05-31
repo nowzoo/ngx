@@ -1,8 +1,21 @@
 {
-  "name": "ngx-fire",
-  "version": "0.0.1",
-  "peerDependencies": {
-    "@angular/common": "^8.0.0",
-    "@angular/core": "^8.0.0"
+	"name": "@nowzoo/ngx-fire",
+  "version": "8.0.0",
+  "description": "Directive for binding an Angular Reactive form control to a Firebase reference.",
+  "keywords": ["angular", "firebase", "form", "control"],
+  "homepage": "https://github.com/nowzoo/ngx/blob/master/projects/ngx-fire/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nowzoo/ngx"
+  },
+  "bugs": {
+    "url": "https://github.com/nowzoo/ngx/issues"
+  },
+  "license": "MIT",
+	"peerDependencies": {
+    "@angular/common": ">=6.0.0 <9",
+    "@angular/core": ">=6.0.0 <9",
+    "@angular/forms": ">=6.0.0 <9",
+    "firebase": "^6.1.0"
   }
 }
