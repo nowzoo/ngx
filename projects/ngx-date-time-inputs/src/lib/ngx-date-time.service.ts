@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { words } from 'lodash-es';
-import * as momentNs from 'moment';
+import moment from 'moment';
+import words from 'lodash/words';
 
-const moment = momentNs;
 
 
 export class DateParseResult {
@@ -21,8 +20,8 @@ export class NgxDateTimeService {
   monthAbbrsRx: RegExp;
 
   get monthsRx(): RegExp {
-    let n;
-    let m;
+    let n: number;
+    let m: any;
     const monthNames = [];
     for (n = 0; n < 12; n++) {
       m = moment().month(n);
@@ -104,6 +103,7 @@ export class NgxDateTimeService {
     const rx = /\d{1,2}/g;
     const results = [];
 
+// tslint:disable-next-line: no-conditional-assignment
     while ((rxResult = rx.exec(timeStr)) !== null) {
       results.push(rxResult[0]);
     }
@@ -112,10 +112,7 @@ export class NgxDateTimeService {
       hour += 12;
     }
     const minute = results[1] ?  parseInt(results[1], 10) : 0;
-    return {
-      hour: hour,
-      minute: minute
-    };
+    return {hour, minute};
   }
 
 }

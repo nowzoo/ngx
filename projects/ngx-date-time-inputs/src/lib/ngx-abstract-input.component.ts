@@ -1,6 +1,5 @@
 import { ControlValueAccessor, FormControl } from '@angular/forms';
-import * as moment_ from 'moment';
-const moment = moment_;
+import moment from 'moment';
 
 import { NgxDateTimeService } from './ngx-date-time.service';
 
@@ -8,15 +7,15 @@ import { NgxDateTimeService } from './ngx-date-time.service';
 export abstract class NgxAbstractInputComponent implements ControlValueAccessor {
 
   private _control: FormControl = new FormControl('', {updateOn: 'blur'});
-  private _date: moment_.Moment = moment();
+  private _date: moment.Moment = moment();
 
   abstract displayFormat: string;
   abstract inputPlaceholder: string;
   abstract inputId: string;
   abstract inputClass: string;
 
-  propagateChange: Function = () => {};
-  propagateTouched: Function = () => {};
+  propagateChange: any = () => {};
+  propagateTouched: any = () => {};
 
   constructor(
     private _dateService: NgxDateTimeService,
@@ -31,7 +30,7 @@ export abstract class NgxAbstractInputComponent implements ControlValueAccessor 
     return this._control;
   }
 
-  get date(): moment_.Moment {
+  get date(): moment.Moment {
     return this._date;
   }
 

@@ -1,5 +1,5 @@
 import { TestBed, inject } from '@angular/core/testing';
-import * as moment from 'moment';
+import moment from 'moment';
 
 import { NgxDateTimeService } from './ngx-date-time.service';
 
@@ -48,7 +48,9 @@ describe('NgxDateTimeService', () => {
 
   describe('parseDate(dataeStr)', () => {
     let service;
-    let currYear, currMonth, currDate;
+    let currYear: number;
+    let currMonth: number;
+    let currDate: number;
     beforeEach(() => {
       service = TestBed.get(NgxDateTimeService);
       currYear = moment().year();

@@ -68,6 +68,10 @@ gulp.task('build:ngx-firebase-auth',  (cb) => {
   buildLib('ngx-firebase-auth', cb);
 });
 
+gulp.task('build:ngx-date-time-inputs',  (cb) => {
+  buildLib('ngx-date-time-inputs', cb);
+});
+
 
 
 gulp.task('cov', () => {
