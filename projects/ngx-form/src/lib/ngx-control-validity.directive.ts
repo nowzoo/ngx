@@ -22,7 +22,8 @@ export class NgxControlValidityDirective implements AfterContentInit, OnDestroy 
   private _ngUnsubscribe: Subject<void> = new Subject<void>();
   private _validity$: BehaviorSubject<NgxValidity> = new BehaviorSubject(NgxValidity.hidden);
   private _blurUnlisten = null;
-  @ContentChild(NgControl, {static: false}) private _ngControl: NgControl;
+  @ContentChild(NgControl, {static: true})
+  private _ngControl: NgControl;
 
   @Input() showValidityOn: NgxValidityOn | {valid: NgxValidityOn, invalid: NgxValidityOn};
 

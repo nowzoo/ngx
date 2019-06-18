@@ -24,6 +24,7 @@ export interface IAccountResult {
 }
 
 
+
 export const SK_SIGN_IN_LINK_SAVED_EMAIL = 'ngx-firebase-auth-sign-in-link-saved-email';
 export const SK_SAVED_EMAIL = 'ngx-firebase-auth-saved-email';
 export const SK_SAVED_PERSISTENCE = 'ngx-firebase-auth-saved-persistence';

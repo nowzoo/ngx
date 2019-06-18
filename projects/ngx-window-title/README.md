@@ -33,19 +33,19 @@ Then, place window title directives in your route components' html. There are tw
 `app` and `route`; corresponding to the position in the title. By default, the `route` title comes first. You **must** pass one of these to the directive in order for the directive to have effect. 
 
 ```html
-<ng-template ngxWindowTitle context="app">My Great App</ng-template>
+<ng-template ngxWindowTitle="app">My Great App</ng-template>
 ```
 
 ```html
 <!-- some subordinate route -->
-<ng-template ngxWindowTitle context="route">Profile</ng-template>
+<ng-template ngxWindowTitle="route">Profile</ng-template>
 ```
 
 With the above, the route title would be `Profile | My Great App`.
 
 You can add dynamic titles.
 ```html
-<ng-template ngxWindowTitle context="route">{{foo.title}}</ng-template>
+<ng-template ngxWindowTitle="route">{{foo.title}}</ng-template>
 ```
 
 
@@ -75,7 +75,7 @@ Place these in your routes' HTML. Note that you have to use the directive with a
 
 - Selector: `[ngxWindowTitle]` 
 - Inputs
-    - `context: WindowContext` Required.
+    - `ngxWindowTitle: WindowContext` Required.
 
 ### Component `WindowTitleComponent`
 

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '../shared/shared.module';
+import { NgxFirebaseAuthSharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxFirebaseAuthComponent } from './auth.component';
 
@@ -11,7 +11,7 @@ import { NgxFirebaseAuthComponent } from './auth.component';
   ],
   imports: [
     CommonModule,
-    SharedModule,
+    NgxFirebaseAuthSharedModule,
     ReactiveFormsModule
   ],
   exports: [

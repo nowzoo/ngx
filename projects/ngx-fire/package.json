@@ -1,6 +1,6 @@
 {
 	"name": "@nowzoo/ngx-fire",
-  "version": "8.0.0",
+  "version": "8.0.2",
   "description": "Directive for binding an Angular Reactive form control to a Firebase reference.",
   "keywords": ["angular", "firebase", "form", "control"],
   "homepage": "https://github.com/nowzoo/ngx/blob/master/projects/ngx-fire/README.md",

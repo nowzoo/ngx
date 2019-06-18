@@ -1,0 +1,51 @@
+<form [formGroup]="fg" (ngSubmit)="submit()" *ngIf="user">
+ 
+  <div class="form-group">
+
+    <label [attr.for]="id + 'password'">
+     Current Password
+    </label>
+
+    <ngx-firebase-auth-password-wrapper>
+      <input
+        #wrappedPasswordInput
+        [attr.id]="id + 'password'"
+        [attr.aria-describedby]="id + 'password-help'"
+        type="password"
+        formControlName="password"
+        class="form-control"
+        [class.is-invalid]="passwordFc.touched && passwordFc.invalid"
+        placeholder="Current Password">
+    </ngx-firebase-auth-password-wrapper>
+    <small [attr.id]="id + 'password-help'" class="form-text text-muted">
+      Enter the current password for {{user.email}}.
+    </small>
+    <div
+      class="invalid-feedback d-block"
+      *ngIf="passwordFc.touched && passwordFc.hasError('required')">
+      Required.
+    </div>
+    <div
+      class="invalid-feedback d-block"
+      *ngIf="passwordFc.touched && passwordFc.hasError('auth/wrong-password')">
+      Wrong password.
+    </div>
+    
+  </div><!-- class="form-group" password -->
+
+  
+  
+  <div class="form-group">
+    <button
+      type="submit"
+      class="btn btn-primary btn-block"
+      [disabled]="submitting || fg.invalid">
+      <i class="fas fa-fw fa-sign-in" aria-hidden="true"></i>
+      Reauthenticate
+    </button>
+  </div><!-- class="form-group" submit -->
+
+ 
+
+
+</form>

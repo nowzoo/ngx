@@ -3,6 +3,6 @@
     <ng-container *ngTemplateOutlet="appTemplate"></ng-container>
   </div>
   <div #route (cdkObserveContent)="onContentChange()" [debounce]="20">
-    <ng-container *ngTemplateOutlet="appTemplate"></ng-container>
+    <ng-container *ngTemplateOutlet="routeTemplate"></ng-container>
   </div>
 </div>

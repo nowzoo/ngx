@@ -1,6 +1,6 @@
 {
   "name": "@nowzoo/ngx-firebase-auth",
-  "version": "8.0.0",
+  "version": "8.0.1",
   "description": "Drop-in sign in, reset password and oob components, styled with Bootstrap, for Angular.",
   "keywords": ["angular", "firebase", "auth", "oob"],
   "homepage": "https://github.com/nowzoo/ngx/blob/master/projects/ngx-firebase-auth/README.md",

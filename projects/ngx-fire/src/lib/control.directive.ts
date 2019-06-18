@@ -6,7 +6,9 @@ import {
   Optional,
   OnInit,
   OnDestroy,
-  NgZone
+  NgZone,
+  Output,
+  EventEmitter
 } from '@angular/core';
 import {
   database
@@ -35,6 +37,7 @@ export class NgxFireControlDirective implements OnInit, OnDestroy {
   @Input() ngxFireControl: database.Reference;
   @Input() debounce = 0;
   @Input() trim = true;
+  @Output() saved: EventEmitter<void> = new EventEmitter();
   private _formDirective: FormControlName|FormControlDirective;
   private _dbListener: any = null;
   private _formSubscription: Subscription = null;
@@ -110,6 +113,7 @@ export class NgxFireControlDirective implements OnInit, OnDestroy {
     this.ref.set(dbVal)
       .then(() => {
         this._saving$.next(false);
+        this.saved.emit();
       })
       .catch((error: Error) => {
         this._onDbError(error);

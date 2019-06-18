@@ -80,6 +80,12 @@
       ],
       "ngx-date-time-inputs/*": [
         "dist/ngx-date-time-inputs/*"
+      ],
+      "ngx-color-control": [
+        "dist/ngx-color-control"
+      ],
+      "ngx-color-control/*": [
+        "dist/ngx-color-control/*"
       ]
     }
   }

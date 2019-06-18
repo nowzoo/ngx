@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '../shared/shared.module';
+import { NgxFirebaseAuthSharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
@@ -22,7 +22,7 @@ import { OobVerifyEmailComponent } from './oob-verify-email/oob-verify-email.com
     CommonModule,
     ReactiveFormsModule,
     RouterModule,
-    SharedModule
+    NgxFirebaseAuthSharedModule
   ],
   exports: [
     NgxFirebaseAuthOobComponent

@@ -27,4 +27,4 @@ import { PersistenceControlComponent } from './persistence-control/persistence-c
     PersistenceControlComponent
   ],
 })
-export class SharedModule { }
+export class NgxFirebaseAuthSharedModule { }

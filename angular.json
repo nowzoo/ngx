@@ -357,6 +357,41 @@
           }
         }
       }
+    },
+    "ngx-color-control": {
+      "projectType": "library",
+      "root": "projects/ngx-color-control",
+      "sourceRoot": "projects/ngx-color-control/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-color-control/tsconfig.lib.json",
+            "project": "projects/ngx-color-control/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-color-control/src/test.ts",
+            "tsConfig": "projects/ngx-color-control/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-color-control/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-color-control/tsconfig.lib.json",
+              "projects/ngx-color-control/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ngx-crumbs"
