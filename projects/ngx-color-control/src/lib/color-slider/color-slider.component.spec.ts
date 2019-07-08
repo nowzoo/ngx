@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NgxColorControlComponent } from './ngx-color-control.component';
+import { ColorSliderComponent } from './color-slider.component';
 
-describe('NgxColorControlComponent', () => {
-  let component: NgxColorControlComponent;
-  let fixture: ComponentFixture<NgxColorControlComponent>;
+describe('ColorSliderComponent', () => {
+  let component: ColorSliderComponent;
+  let fixture: ComponentFixture<ColorSliderComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NgxColorControlComponent ]
+      declarations: [ ColorSliderComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NgxColorControlComponent);
+    fixture = TestBed.createComponent(ColorSliderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

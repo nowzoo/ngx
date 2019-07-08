@@ -22,7 +22,7 @@ export class NgxTimeInputComponent extends NgxAbstractInputComponent {
   @Input() displayFormat = 'LT';
   @Input() inputPlaceholder = 'Enter a time';
   @Input() inputId: string;
-  @Input() inputClass: string;
+  @Input() inputClass = 'form-control';
 
   constructor(
     ds: NgxDateTimeService,

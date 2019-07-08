@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
-import { NgxColorControlComponent } from './ngx-color-control.component';
+import { ColorSliderComponent } from './color-slider/color-slider.component';
+import { ColorPaletteComponent } from './color-palette/color-palette.component';
+import { ColorControlComponent } from './color-control/color-control.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
-  declarations: [NgxColorControlComponent],
+  declarations: [ColorSliderComponent, ColorPaletteComponent, ColorControlComponent],
   imports: [
+    CommonModule
   ],
-  exports: [NgxColorControlComponent]
+  exports: [ColorSliderComponent, ColorPaletteComponent, ColorControlComponent]
 })
 export class NgxColorControlModule { }

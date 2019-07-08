@@ -1,12 +1,13 @@
-import { Directive, Input, TemplateRef, OnInit, OnDestroy } from '@angular/core';
+import { Directive, Input, TemplateRef, OnInit, OnDestroy, OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxCrumbsService } from './ngx-crumbs.service';
 
 @Directive({
   selector: '[ngxCrumb]'
 })
-export class CrumbDirective implements OnInit, OnDestroy {
+export class CrumbDirective implements OnInit, OnDestroy, OnChanges {
   @Input() title: string;
+  @Input() altRoute: ActivatedRoute = null;
   constructor(
     private _templateRef: TemplateRef<any>,
     private _route: ActivatedRoute,
@@ -17,6 +18,9 @@ export class CrumbDirective implements OnInit, OnDestroy {
     return this._templateRef;
   }
   get route(): ActivatedRoute {
+    if (this.altRoute) {
+      return this.altRoute;
+    }
     return this._route;
   }
   get service(): NgxCrumbsService {
@@ -26,6 +30,12 @@ export class CrumbDirective implements OnInit, OnDestroy {
   ngOnInit() {
     this.service.setRouteBreadcrumb(this.route, this.templateRef, this.title);
   }
+
+  ngOnChanges() {
+    this.service.setRouteBreadcrumb(this.route, this.templateRef, this.title);
+  }
+
+
 
   ngOnDestroy() {
     this.service.removeRouteBreadcrumb(this.route);

@@ -1,0 +1,123 @@
+<div class="calendar">
+  <div class="header d-flex justify-content-between">
+    <div class="btn-group btn-group-sm  mb-3" role="group" aria-label="Select month">
+      <button 
+        class="btn btn-outline-secondary" 
+        type="button" 
+        (click)="setDisplayedMonth(prevMonthOption)">
+        &#9664;
+      </button>
+      <div class="btn-group btn-group-sm" role="group">
+        <button 
+          [attr.id]="id + '-month-dropdown'" 
+          type="button" 
+          class="btn btn-outline-secondary dropdown-toggle" 
+          data-toggle="dropdown"
+          aria-haspopup="true" 
+          aria-expanded="false">
+          {{displayTs | amDateFormat:'MMM'}}
+        </button>
+        <div class="dropdown-menu" [attr.aria-labelledby]="id + '-month-dropdown'">
+          <ng-container *ngFor="let o of monthOptions">
+            <button 
+              type="button" 
+              class="dropdown-item" 
+              [class.active]="o.month() === displayedMonth.month()"
+              (click)="setDisplayedMonth(o)">
+              {{o | amDateFormat:'MMMM'}}
+            </button>
+          </ng-container>
+        </div>
+      </div>
+      <button 
+        class="btn btn-outline-secondary" 
+        type="button"
+        (click)="setDisplayedMonth(nextMonthOption)">
+        &#9658;
+      </button>
+    </div>
+    <div class="btn-group btn-group-sm  mb-3" role="group" aria-label="Select year">
+      <button class="btn btn-outline-secondary" type="button" (click)="setDisplayedMonth(prevYearOption)">
+        &#9664;
+      </button>
+      <div class="btn-group btn-group-sm" role="group">
+        <button [attr.id]="id + '-year-dropdown'" type="button" class="btn btn-outline-secondary dropdown-toggle"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{displayTs | amDateFormat:'YYYY'}}
+        </button>
+        <div class="dropdown-menu" [attr.aria-labelledby]="id + '-month-dropdown'">
+          <ng-container *ngFor="let o of yearOptions">
+            <button type="button" class="dropdown-item" [class.active]="o.year() === displayedMonth.year()"
+              (click)="setDisplayedMonth(o)">
+              {{o | amDateFormat:'YYYY'}}
+            </button>
+          </ng-container>
+        </div>
+      </div>
+      <button class="btn btn-outline-secondary" type="button" (click)="setDisplayedMonth(nextYearOption)">
+        &#9658;
+      </button>
+    </div>
+  </div>
+  <div class="month">
+    <div class="day-headers">
+      <div class="day-header" *ngFor="let d of weeks[0]">
+        <span class="small text-muted">{{ d.m | amDateFormat:'dd'}}</span>
+        
+      </div>
+    </div>
+    <div class="week" *ngFor="let w of weeks">
+      <ng-container *ngFor="let d of w">
+        <button 
+          (click)="selectDate(d.m)" 
+          class="day" 
+          [class.selected]="d.selected" 
+          [class.currentMonth]="d.currentMonth"
+          [class.today]="d.today" 
+          [class.disabled]="d.disabled" 
+          [disabled]="d.disabled">
+          <span class="date">
+            {{d.m | amDateFormat:'D'}}
+          </span>
+          <div *ngIf="d.today" class="today-marker">
+            <span class="sr-only">Today</span>
+          </div>
+        </button>
+      </ng-container>
+      
+    </div>
+  </div>
+  <div class="footer">
+    <div class="text-muted small d-flex align-items-center mt-1">
+      <span class="mr-1">Selected: </span>
+      <a href="#" role="button"
+      (click)="$event.preventDefault();setDisplayedMonth(selectedDate)">
+        {{selectedDate.valueOf() | amDateFormat:'dddd LL'}}
+    </a>
+    </div>
+
+    <div class="text-muted small mt-1" 
+      *ngIf="minDate !== null && maxDate !== null">
+      Select a date between
+      <a href="#" role="button" (click)="$event.preventDefault();setDisplayedMonth(minDate)">
+        {{minDate.valueOf() | amDateFormat:'dddd LL'}}</a> 
+        and 
+      <a href="#" role="button" (click)="$event.preventDefault();setDisplayedMonth(maxDate)">
+        {{maxDate.valueOf() | amDateFormat:'dddd LL'}}</a>.
+    </div>
+    <div class="text-muted small mt-1" *ngIf="minDate !== null && maxDate === null">
+      Select a date on or after
+      <a href="#" role="button" (click)="$event.preventDefault();setDisplayedMonth(minDate)">
+        {{minDate.valueOf() | amDateFormat:'dddd LL'}}</a>.
+    </div>
+    <div class="text-muted small mt-1" *ngIf="minDate === null && maxDate !== null">
+      Select a date on or before
+      <a href="#" role="button" (click)="$event.preventDefault();setDisplayedMonth(maxDate)">
+        {{maxDate.valueOf() | amDateFormat:'dddd LL'}}</a>.
+    </div>
+    
+    
+  </div>
+  
+</div>
+

@@ -1,6 +1,6 @@
 {
 	"name": "@nowzoo/ngx-crumbs",
-  "version": "8.0.0",
+  "version": "8.0.2",
   "description": "Declarative route breadcrumbs for Angular.",
   "keywords": ["angular", "router", "breadcrumbs"],
   "homepage": "https://github.com/nowzoo/ngx/blob/master/projects/ngx-crumbs/README.md",

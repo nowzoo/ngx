@@ -1,0 +1,27 @@
+<ng-template #modal>
+  <div class="modal fade" tabindex="-1" role="dialog" [attr.aria-labelledby]="id + 'modal-title'">
+    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- don't forget to add ids and aria-attributes for accessibility -->
+          <h5 class="modal-title" [attr.id]="id + 'modal-title'">
+            {{title}}
+          </h5>
+          <!-- the native bootstrap  data-dismiss="modal" works as intended -->
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <ngx-calendar 
+            [min]="min" 
+            [max]="max" [selected]="selected" 
+            (selectedChange)="setSelected($event)"
+            (monthChange)="onMonthChanged()">
+          </ngx-calendar>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</ng-template>

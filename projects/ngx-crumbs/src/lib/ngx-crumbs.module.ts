@@ -4,11 +4,13 @@ import { ObserversModule } from '@angular/cdk/observers';
 
 import { CrumbDirective } from './crumb.directive';
 import { NgxCrumbsService } from './ngx-crumbs.service';
+import { CalendarModalComponent } from './ngx-date-time-inputs/calendar-modal/calendar-modal.component';
 
 
 @NgModule({
   declarations: [
     CrumbDirective,
+    CalendarModalComponent,
   ],
   imports: [
     CommonModule,

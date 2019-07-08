@@ -21,7 +21,7 @@ export class NgxDateInputComponent extends NgxAbstractInputComponent {
   @Input() displayFormat = 'LL';
   @Input() inputPlaceholder = 'Enter a date';
   @Input() inputId: string;
-  @Input() inputClass: string;
+  @Input() inputClass = 'form-control';
   constructor(
     ds: NgxDateTimeService,
   ) {
@@ -38,6 +38,7 @@ export class NgxDateInputComponent extends NgxAbstractInputComponent {
     const d = this.dateService.parseDate(this.control.value);
     this.date.year(d.year).month(d.month).date(d.date);
     const modelValue = this.date.format(MODEL_DATE_FORMAT);
+    console.log('from text', modelValue);
     this.control.setValue(this.date.format(this.displayFormat));
     this.propagateChange(modelValue);
     this.propagateTouched(modelValue);

@@ -16,7 +16,9 @@
     "@angular/common": ">=6.0.0 <9",
     "@angular/core": ">=6.0.0 <9",
     "@angular/forms": ">=6.0.0 <9",
+    "@nowzoo/ngx-bootstrap-modal": "^8.0.0",
     "lodash": "^4.17.11",
-    "moment": "^2.24.0"
+    "moment": "^2.24.0",
+    "ngx-moment": "^3.4.0"
   }
 }

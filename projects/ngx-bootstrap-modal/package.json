@@ -1,0 +1,19 @@
+{
+	"name": "@nowzoo/ngx-bootstrap-modal",
+	"version": "8.0.0",
+	"peerDependencies": {
+		"@angular/common": ">=6.0.0 <9",
+		"@angular/core": ">=6.0.0 <9",
+		"bootstrap": "^4.3.1",
+		"jquery": "^3.3.1",
+		"popper.js": "^1.14.7"
+	},
+	"description": "Service for creating and showing Bootstrap modals from templates.",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/nowzoo/ngx-bootstrap-modal"
+	},
+	"bugs": "https://github.com/nowzoo/ngx-bootstrap-modal/issues",
+	"homepage": "https://nowzoo.github.io/ngx-bootstrap-modal"
+}

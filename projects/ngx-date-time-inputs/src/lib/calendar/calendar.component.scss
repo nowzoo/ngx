@@ -1,0 +1,149 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+$calendarWidth: 270px;
+$dayDim: $calendarWidth / 7;
+$btnDim: $dayDim * .9;
+
+.calendar {
+  width: $calendarWidth;
+}
+
+.header {
+  width: 100%;
+}
+.footer {
+  width: 100%;
+}
+.month {
+  width: 100%;
+  .day-headers {
+    width: 100%;
+    display: flex;
+    .day-header {
+      width: $dayDim;
+      text-align: center;
+    }
+  }
+  .week {
+    width: 100%;
+    display: flex;
+    .day {
+      border-color: $gray-100;
+      
+      border-style: solid;
+      border-top-width: 1px;
+      border-left-width: 1px;
+      border-bottom-width: 0;
+      border-right-width: 0;
+      position: relative;
+      width: $dayDim;
+      height: $dayDim;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      
+      justify-content: center;
+      align-items: center;
+      background-color: $gray-100;
+      padding: 0;
+      margin: 0;
+      text-decoration: none;
+      cursor: pointer;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      .today-marker {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 10px 10px 0 0;
+        border-color: $warning transparent transparent transparent;
+
+      }
+      span.date {
+        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $gray-600;
+        width: $btnDim;
+        height: $btnDim;
+        border-radius: 50%;
+        border-color: transparent;
+        border-width: 1px;
+        border-style: solid;
+      }
+      &.currentMonth {
+        background-color: $white;
+      }
+      &.currentMonth span.date {
+        color: $gray-800;
+      }
+      &:hover span.date,
+      &:focus span.date {
+        border-color: $primary;
+      }
+      &:focus {
+        outline: 0;
+      }
+      &.disabled {
+        
+        span.date{
+          color: $gray-400;
+          text-decoration: line-through; 
+        }
+        cursor: not-allowed;
+        
+        &:hover {
+          span.date{
+             border-color: transparent;
+          }
+         
+        }
+      }
+
+      &.selected span.date {
+        background: $primary;
+        color: $white;
+        &.currentMonth {
+          color: $white;
+        }
+      }
+      &:last-child {
+        border-right-width: 1px; 
+      }
+    }
+    &:last-child {
+      .day {
+        border-bottom-width: 1px;
+      }
+    }
+    
+  }
+  
+}
+
+.calendar-week {
+  border-top: 1px solid $gray-100;
+  &:last-child {
+    border-bottom: 1px solid $gray-100;
+  }
+  .day {
+    
+    border-left: 1px solid $gray-100;
+    &:last-child {
+      border-right: 1px solid $gray-100;
+    }
+    
+  }
+}
+
+
+
+
+
+
+

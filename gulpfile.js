@@ -71,6 +71,17 @@ gulp.task('build:ngx-firebase-auth',  (cb) => {
 gulp.task('build:ngx-date-time-inputs',  (cb) => {
   buildLib('ngx-date-time-inputs', cb);
 });
+gulp.task('build:ngx-color-control', (cb) => {
+  buildLib('ngx-color-control', cb);
+});
+
+gulp.task('build:ngx-bootstrap-popup', (cb) => {
+  buildLib('ngx-bootstrap-popup', cb);
+});
+
+gulp.task('build:ngx-bootstrap-modal', (cb) => {
+  buildLib('ngx-bootstrap-modal', cb);
+});
 
 
 
