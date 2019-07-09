@@ -12,4 +12,6 @@ export interface IPopupOptions {
   fallbackPlacement?: string | string[];
   boundary?: string | HTMLElement;
   trigger?: string;
+  sanitize?: boolean;
+  sanitizeFn?: (content: string) => string;
 }

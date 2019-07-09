@@ -1,0 +1,41 @@
+<p>
+  <button class="btn btn-primary" 
+    ngxBootstrapPopover [popoverTitle]="popoverTitle" 
+    [popoverContent]="popoverContent"
+    (popoverEvents)="onPopoverEvent($event)">
+    Popover from Template
+  </button>
+  <ng-template #popoverTitle>
+    <div class="d-flex justify-content-between align-items-center">
+      <h5 class="m-0">
+        Popover from Template
+      </h5>
+      
+      <span class="badge badge-primary">
+        {{timer}}s
+      </span>
+    </div>
+    
+    
+  </ng-template>
+  <ng-template #popoverContent>
+    <p>
+      Opened {{counter}} time(s).
+    </p>
+    <p>
+      Open for {{timer}} second(s).
+    </p>
+   
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+      Eius repellat officiis, harum hic ea voluptate voluptatum 
+      amet inventore placeat explicabo magni, ducimus provident 
+      iste. Sed possimus provident ullam nostrum ea!
+    </p>
+   
+    <p>
+      <a href="#" (click)="$event.preventDefault()">Click Me</a>
+    </p>
+  </ng-template>
+  <button class="btn btn-light ml-4">Next focusable thing</button>
+</p>

@@ -10,11 +10,12 @@ import {
   ComponentFactoryResolver,
   ViewContainerRef,
   SimpleChanges,
-  EventEmitter
+  EventEmitter,
 } from '@angular/core';
 
 import { NgxBootstrapPopup } from './ngx-bootstrap-popup';
 import { IPopupOptions } from './shared';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Directive({
   selector: '[ngxBootstrapPopover]'
@@ -30,9 +31,10 @@ export class NgxBootstrapPopoverDirective extends NgxBootstrapPopup implements O
   constructor(
     elementRef: ElementRef,
     cfr: ComponentFactoryResolver,
-    vcr: ViewContainerRef
+    vcr: ViewContainerRef,
+    sanitizer: DomSanitizer
   ) {
-    super(elementRef, cfr, vcr);
+    super(elementRef, cfr, vcr, sanitizer);
     this.popoverEvents = this.events;
   }
   get popupType(): 'popover' | 'tooltip' {

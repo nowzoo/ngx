@@ -6,13 +6,15 @@ import {
   ElementRef,
   ComponentRef,
   ViewContainerRef,
-  ComponentFactoryResolver
+  ComponentFactoryResolver,
+  SecurityContext
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NgxBootstrapPopupPlaceholderComponent } from './ngx-bootstrap-popup-placeholder.component';
 
 import { IPopupOptions } from './shared';
+import { DomSanitizer } from '@angular/platform-browser';
 
 declare const jQuery: any;
 
@@ -42,7 +44,8 @@ export abstract class NgxBootstrapPopup implements OnInit, OnDestroy {
   constructor(
     private _elementRef: ElementRef,
     private _cfr: ComponentFactoryResolver,
-    private _vcr: ViewContainerRef
+    private _vcr: ViewContainerRef,
+    private _sanitizer: DomSanitizer
   ) {
     this.events = new EventEmitter();
   }
@@ -57,6 +60,10 @@ export abstract class NgxBootstrapPopup implements OnInit, OnDestroy {
 
   get el(): HTMLElement {
     return this._elementRef.nativeElement;
+  }
+
+  get sanitizer(): DomSanitizer {
+    return this._sanitizer;
   }
 
   get $el(): any {
@@ -99,20 +106,22 @@ export abstract class NgxBootstrapPopup implements OnInit, OnDestroy {
     this.bsEventListener = ((event: Event) => {
       if (this.dismissOnClickOutside && event.type === 'shown') {
         this.clickDismissListener = ((clickEvent: Event) => {
-          if (this.bsInstance.tip.contains(clickEvent.target)) {
+
+          if ((clickEvent.target as any).nodeType && this.bsInstance.tip.contains(clickEvent.target)) {
             return;
           }
-          jQuery('body').off('click focusin', this.clickDismissListener);
+          jQuery(window).off('click focusin', this.clickDismissListener);
           this.clickDismissListener = null;
           this.hide();
         });
-        jQuery('body').on('click focusin', this.clickDismissListener);
+
+        jQuery(window).on('click focusin', this.clickDismissListener);
       }
       if (event.type === 'show') {
         this._showing = true;
       }
       if (event.type === 'hidden') {
-        jQuery('body').off('click focusin', this.clickDismissListener);
+        jQuery(window).off('click focusin', this.clickDismissListener);
         this.clickDismissListener = null;
         this._showing = false;
       }
@@ -131,15 +140,17 @@ export abstract class NgxBootstrapPopup implements OnInit, OnDestroy {
       this.titleComponentRef.instance.inserted = this.title;
       options.title = this.titleComponentRef.instance.insertedContent.nativeElement;
       options.html = true;
-      options.sanitize = false;
     }
     if (this.content) {
       this._contentComponentRef = this.getPlaceholderComponent();
       this.contentComponentRef.instance.inserted = this.content;
       options.content = this.contentComponentRef.instance.insertedContent.nativeElement;
       options.html = true;
-      options.sanitize = false;
-      options.sanitizeFn = null;
+    }
+    if (! options.sanitizeFn) {
+      options.sanitizeFn = (content: any) => {
+        return this.sanitizer.sanitize(SecurityContext.HTML, content);
+      };
     }
     return options;
   }
@@ -148,12 +159,12 @@ export abstract class NgxBootstrapPopup implements OnInit, OnDestroy {
     const factory = this.cfr.resolveComponentFactory(NgxBootstrapPopupPlaceholderComponent);
     const ref = this.vcr.createComponent(factory, 0);
     ref.instance.contentChanged
-    .pipe(takeUntil(this._ngUnsubscribe))
-    .subscribe(() => {
-      if (this.showing) {
-        this.update();
-      }
-    });
+      .pipe(takeUntil(this._ngUnsubscribe))
+      .subscribe(() => {
+        if (this.showing) {
+          this.update();
+        }
+      });
     return ref;
   }
 

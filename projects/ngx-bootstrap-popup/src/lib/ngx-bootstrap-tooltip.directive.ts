@@ -14,6 +14,7 @@ import {
 } from '@angular/core';
 import { NgxBootstrapPopup } from './ngx-bootstrap-popup';
 import { IPopupOptions } from './shared';
+import { DomSanitizer } from '@angular/platform-browser';
 @Directive({
   selector: '[ngxBootstrapTooltip]'
 })
@@ -27,9 +28,10 @@ export class NgxBootstrapTooltipDirective extends NgxBootstrapPopup implements O
   constructor(
     elementRef: ElementRef,
     cfr: ComponentFactoryResolver,
-    vcr: ViewContainerRef
+    vcr: ViewContainerRef,
+    sanitizer: DomSanitizer
   ) {
-    super(elementRef, cfr, vcr);
+    super(elementRef, cfr, vcr, sanitizer);
     this.tooltipEvents = this.events;
   }
   get popupType(): 'popover' | 'tooltip' {
