@@ -7,7 +7,7 @@ var compilerOptions = Object.assign(
   {
     emitDecoratorMetadata: true,
     experimentalDecorators: true,
-    esModuleInterop: true, 
+    esModuleInterop: true,
     allowSyntheticDefaultImports: true,
   }
 );
@@ -21,15 +21,15 @@ module.exports = function (wallaby) {
 
     module: {
       rules: [
-        {test: /.css$/, loader: ['raw-loader']},
-        {test: /.html$/, loader: 'raw-loader'},
-        {test: /.ts$/, loader: '@ngtools/webpack', include: /node_modules/, query: {tsConfigPath: 'tsconfig.json'}},
-        {test: /.js$/, loader: 'angular2-template-loader', exclude: /node_modules/},
-        {test: /.json$/, loader: 'json-loader'},
-        {test: /.styl$/, loaders: ['raw-loader', 'stylus-loader']},
-        {test: /.less$/, loaders: ['raw-loader', 'less-loader']},
-        {test: /.scss$|.sass$/, loaders: ['raw-loader', 'sass-loader']},
-        {test: /.(jpg|png)$/, loader: 'url-loader?limit=128000'}
+        { test: /.css$/, loader: ['raw-loader'] },
+        { test: /.html$/, loader: 'raw-loader' },
+        { test: /.ts$/, loader: '@ngtools/webpack', include: /node_modules/, query: { tsConfigPath: 'tsconfig.json' } },
+        { test: /.js$/, loader: 'angular2-template-loader', exclude: /node_modules/ },
+        { test: /.json$/, loader: 'json-loader' },
+        { test: /.styl$/, loaders: ['raw-loader', 'stylus-loader'] },
+        { test: /.less$/, loaders: ['raw-loader', 'less-loader'] },
+        { test: /.scss$|.sass$/, loaders: ['raw-loader', 'sass-loader'] },
+        { test: /.(jpg|png)$/, loader: 'url-loader?limit=128000' }
       ]
     },
 
@@ -55,14 +55,14 @@ module.exports = function (wallaby) {
 
   return {
     files: [
-      {pattern: 'src/**/*.+(ts|css|less|scss|sass|styl|html|json|svg)', load: false},
-      {pattern: 'src/**/*.d.ts', ignore: true},
-      {pattern: 'src/**/*spec.ts', ignore: true}
+      { pattern: 'src/**/*.+(ts|css|less|scss|sass|styl|html|json|svg)', load: false },
+      { pattern: 'src/**/*.d.ts', ignore: true },
+      { pattern: 'src/**/*spec.ts', ignore: true }
     ],
 
     tests: [
-      {pattern: 'src/**/*spec.ts', load: false},
-      {pattern: 'src/**/*e2e-spec.ts', ignore: true}
+      { pattern: 'src/**/*spec.ts', load: false },
+      { pattern: 'src/**/*e2e-spec.ts', ignore: true }
     ],
 
     testFramework: 'jasmine',
@@ -77,7 +77,7 @@ module.exports = function (wallaby) {
       app.use('/assets', express.static(path.join(__dirname, 'src/assets')));
     },
 
-    env: {kind: 'chrome'},
+    env: { kind: 'chrome' },
 
     postprocessor: webpackPostprocessor,
 

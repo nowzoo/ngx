@@ -1,0 +1,18 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/ngx-bootstrap-calendar",
+  "lib": {
+    "entryFile": "src/public-api.ts",
+    "umdModuleIds": {
+      "@fortawesome/free-solid-svg-icons": "free-solid-svg-icons",
+      "@fortawesome/fontawesome-svg-core": "fontawesome-svg-core",
+      "@fortawesome/angular-fontawesome": "fortawesome.angular-fontawesome",
+      "moment": "moment",
+      "ngx-moment": "ngx-moment",
+      "lodash/chunk": "_.chunk",
+      "@nowzoo/ngx-date-time-inputs": "nowzoo.ngx-date-time-inputs",
+      "@nowzoo/ngx-bootstrap-modal": "nowzoo.ngx-bootstrap-modal"
+      
+    }
+  }
+}

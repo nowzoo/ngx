@@ -59,6 +59,7 @@ describe('NgxDateTimeService', () => {
 
     });
     it('should handle various strings with a us locale', () => {
+      console.log(moment);
       expect(service.parseDate('feb 3')).toEqual({year: currYear, month: 1, date: 3});
       expect(service.parseDate('3 feb')).toEqual({year: currYear, month: 1, date: 3});
       expect(service.parseDate('3 feb 2016')).toEqual({year: 2016, month: 1, date: 3});

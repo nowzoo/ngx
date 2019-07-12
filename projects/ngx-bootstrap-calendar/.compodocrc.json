@@ -1,0 +1,7 @@
+{
+  "tsconfig": "tsconfig.lib.json",
+  "disableRoutesGraph": true,
+  "output": "../../docs/documentation/ngx-bootstrap-calendar",
+  "serve": true,
+  "watch": true
+}

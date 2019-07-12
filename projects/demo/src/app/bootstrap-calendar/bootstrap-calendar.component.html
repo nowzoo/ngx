@@ -1,0 +1,29 @@
+<div class="container my-5">
+  <h1 class="display-4">Bootstrap Calendar</h1>
+  <p class="lead">
+    Calendar controls.
+  </p>
+  <hr>
+
+  <h4>Calendar Control</h4>
+  <div class="form-group">
+    <label [attr.for]="id + 'date'">Date</label>
+    <ngx-bootstrap-calendar-control [inputId]="id + 'date'" [formControl]="fc"></ngx-bootstrap-calendar-control>
+  </div>
+
+  <h4>Basic Calendar</h4>
+  <div class="mb-4">
+    <ngx-bootstrap-calendar [(selected)]="inlineValue"></ngx-bootstrap-calendar>
+  </div>
+  <pre>Current Value: {{inlineValue}}</pre>
+
+  <h4>Calendar Modal</h4>
+  <ngx-bootstrap-calendar-modal 
+    #cal="ngxBootstrapCalendarModal" 
+    [(selected)]="modalValue"></ngx-bootstrap-calendar-modal>
+  <div class="mb-4">
+    Current Value: {{modalValue}} <button class="btn btn-primary btn-sm" (click)="cal.show()">Edit...</button>
+  </div>
+
+ 
+</div>

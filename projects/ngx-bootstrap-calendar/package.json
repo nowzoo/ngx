@@ -1,0 +1,17 @@
+{
+  "name": "@nowzoo/ngx-bootstrap-calendar",
+  "version": "8.0.0",
+  "peerDependencies": {
+    "@angular/common": "^8.1.0",
+    "@angular/core": "^8.1.0",
+    "@angular/forms": "^8.1.0",
+    "@fortawesome/angular-fontawesome": "^0.4.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.19",
+    "@fortawesome/free-solid-svg-icons": "^5.9.0",
+    "@nowzoo/ngx-date-time-inputs": "^8.0.0",
+    "@nowzoo/ngx-bootstrap-modal": "^8.0.0",
+    "moment": "^2.24.0",
+    "ngx-moment": "^3.4.0",
+    "lodash": "^4.17.11"
+  }
+}

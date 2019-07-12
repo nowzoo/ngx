@@ -1,0 +1,8 @@
+<div class="form-group">
+  <label [attr.for]="id + 'time'">Time</label>
+  <ngx-time-input 
+    [formControl]="control" 
+    [inputId]="id + 'time'"
+    [inputClass]="'form-control' + (control.valid ? '' : ' is-invalid')"></ngx-time-input>
+  <small class="form-text text-muted">Model Value: {{control.value}}</small>
+</div>

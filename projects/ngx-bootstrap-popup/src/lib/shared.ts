@@ -1,3 +1,6 @@
+import { InjectionToken } from '@angular/core';
+
+
 export interface IPopupOptions {
   animation?: boolean;
   html?: boolean;
@@ -15,3 +18,8 @@ export interface IPopupOptions {
   sanitize?: boolean;
   sanitizeFn?: (content: string) => string;
 }
+
+export const NGX_BOOTSTRAP_POPUP_OPTIONS: InjectionToken<IPopupOptions> =
+  new InjectionToken(`Default options for @nowzoo/ngx-bootstrap-popup.`);
+
+

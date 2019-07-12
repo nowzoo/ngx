@@ -1,9 +1,8 @@
-# @nowzoo/ngx-bootstrap-modal
+# @nowzoo/ngx-bootstrap-popup
 
-A minimal library for implementing Bootstrap 4 modals in Angular. The library depends on the native Bootstrap and jQuery code.
+A minimal library for implementing Bootstrap 4 popovers and tooltips 
+in Angular. The library depends on native Bootstrap and jQuery code.
 
-[Demo App](https://nowzoo.github.io/ngx-bootstrap-modal/) |
-[Demo App Code](https://github.com/nowzoo/ngx-bootstrap-modal/tree/master/projects/ngx-bootstrap-modal-demo)
 
 
 ## Quick Start
@@ -11,168 +10,241 @@ A minimal library for implementing Bootstrap 4 modals in Angular. The library de
 Install the library and its dependencies...
 
 ```bash
-npm i -S @nowzoo/ngx-bootstrap-modal jquery popper.js bootstrap
+npm i -S @nowzoo/ngx-bootstrap-popup jquery bootstrap
 ```
 
 Include the dependencies in some way in your build, for example via `angular.json`...
 
 ```json
 "styles": [
-  "node_modules/bootstrap/dist/css/bootstrap.min.css",
-  "projects/ngx-bootstrap-modal-demo/src/styles.scss"
+  "node_modules/bootstrap/dist/css/bootstrap.min.css"
 ],
 "scripts": [
   "node_modules/jquery/dist/jquery.slim.min.js",
-  "node_modules/popper.js/dist/umd/popper.min.js",
-  "node_modules/bootstrap/dist/js/bootstrap.min.js"
+  "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
 ],
 ```
+
+**Note:** In the above example we use `bootstrap.bundle.min.js`, which includes `popper.js`. If you don't use the bundle version you have to install and add `popper.js`.
 
 Import the module...
 ```ts
 //...
-import { NgxBootstrapModalModule } from '@nowzoo/ngx-bootstrap-modal';
+import { 
+  NgxBootstrapPopupModule 
+} from '@nowzoo/ngx-bootstrap-popup';
 
 @NgModule({
-  imports: [
-    NgxBootstrapModalModule
-    //...
-  ]
   //...
+  imports: [
+    NgxBootstrapPopupModule
+  ]
 })
 export class MyModule { }
 ```
 
-The modals are built from native Bootstrap markup contained in an `<ng-template></ng-template>`. All the modal options and behaviors are controlled solely via this markup. Example component html...
+The module provides two directives, `NgxBootstrapTooltipDirective`
+and `NgxBootstrapPopoverDirective`.  Both work with either plain strings or `ng-template`s.
 
 ```html
-<ng-template #myModal>
-  <!-- remove .fade to get rid of animation-->
-  <div class="modal fade" tabindex="-1" role="dialog" [attr.aria-labelledby]="id + 'modal-title'">
-    <!-- control the size and centering by adding classes to .modal-dialog -->
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <form [formGroup]="fg" (ngSubmit)="submit()">
-          <div class="modal-header">
-            <!-- don't forget to add ids and aria-attributes for accessibility -->
-            <h5 class="modal-title" [attr.id]="id + 'modal-title'">
-              Enter Your Name
-            </h5>
-            <!-- the native bootstrap  data-dismiss="modal" works as intended -->
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="form-group">
-              <label [attr.for]="id + 'name'">Your Name</label>
-              <input
-                [attr.id]="id + 'name'"
-                type="text"
-                class="form-control"
-                placeholder="Your Name"
-                formControlName="name">
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-light" data-dismiss="modal">
-              Cancel
-            </button>
-            <button
-              type="submit"
-              class="btn"
-              [class.btn-success]="fg.valid"
-              [class.btn-secondary]="fg.invalid"
-              [disabled]="fg.invalid || submitting">
-              OK
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+<!-- basic tooltip -->
+<button class="btn btn-primary" 
+  ngxBootstrapTooltip tooltipTitle="Tooltip Title as String">
+  Basic Tooltip
+</button>
+
+<!-- tooltip with template-->
+<button class="btn btn-primary" 
+  ngxBootstrapTooltip [tooltipTitle]="tooltipTitle" 
+  (tooltipEvents)="onTooltipEvent($event)">
+  Tooltip from Template
+</button>
+<ng-template #tooltipTitle>
+  <div class="d-flex justify-content-between align-items-center">
+    Opened {{counter}} times.
+    <span class="badge badge-primary ml-2">
+      open for
+      {{timer}}s
+    </span>
   </div>
 </ng-template>
-```
-To show the modal, first inject the `NgxBootstrapModalService` into your component and grab a reference to the `<ng-template>` containing the modal markup with `ViewChild`. Then show the modal with the service's `show(templateRef)` method...
 
-```ts
-import { ViewChild, TemplateRef } from '@angular/core';
-import { NgxBootstrapModalService, INgxBootstrapModalInstance } from '@nowzoo/ngx-bootstrap-modal';
+<!-- basic popover -->
+<button class="btn btn-primary" 
+    ngxBootstrapPopover 
+    popoverTitle="Popover Title as String" 
+    popoverContent="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius repellat officiis, harum hic ea voluptate voluptatum.">
+  Basic Popover
+</button>
 
-export class MyComponent {
-  // grabs the <ng-template #myModal> from the component template
-  @ViewChild('myModal') modalTemplate: TemplateRef<any>;
-  modalInstance: INgxBootstrapModalInstance = null;
-  // accessibility...
-  id = 'some-unique-id';
-  constructor(
-    private modalService: NgxBootstrapModalService
-  ) { }
+<!-- more complex popover example, with templates -->
+<button class="btn btn-primary" 
+    ngxBootstrapPopover [popoverTitle]="popoverTitle" 
+    [popoverContent]="popoverContent"
+    (popoverEvents)="onPopoverEvent($event)">
+  Popover from Template
+</button>
+<ng-template #popoverTitle>
+  <div class="d-flex justify-content-between align-items-center">
+    <h5 class="m-0">
+      Popover from Template
+    </h5>
+    
+    <span class="badge badge-primary">
+      {{timer}}s
+    </span>
+  </div>
+  
+  
+</ng-template>
+<ng-template #popoverContent>
+  <p>
+    Opened {{counter}} time(s).
+  </p>
+  <p>
+    Open for {{timer}} second(s).
+  </p>
+  
+  <p>
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+    Eius repellat officiis, harum hic ea voluptate voluptatum 
+    amet inventore placeat explicabo magni, ducimus provident 
+    iste. Sed possimus provident ullam nostrum ea!
+  </p>
+  
+  <p>
+    <a href="#" (click)="$event.preventDefault()">Click Me</a>
+  </p>
+</ng-template>
 
-  show() {
-    this.modalInstance = this.modalService.show(this.modalTemplate);
-    this.modalInstance.shown.then(() => {
-      // maybe focus something...
-    });
-    this.modalInstance.hidden.then(() => {
-      // do stuff based on what's just happened in the modal...
-      this.modalInstance = null;
-    })
-  }
-}
 ```
 
 ## API
 
-```ts
-class NgxBootstrapModalService {
-  show(templateRef: TemplateRef<any>): INgxBootstrapModalInstance
-}
+### interface IPopupOptions 
+An optional object that you can pass to an individual directive or set globally by providing a value for `NGX_BOOTSTRAP_POPUP_OPTIONS`. All fields are optional, and hew to the native Bootstrap options. Also note that for most of the options you can use `data-` attributes instead.
 
-interface INgxBootstrapModalInstance {
-  // The modal element, useful for focusing fields within it.
-  modalEl: HTMLElement;
-  // Resolves when the modal has been completely shown.
-  shown: Promise<void>;
-  // Resolves when the modal has been completely hidden.
-  hidden: Promise<void>;
-  // An observable of the modal's native Bootstrap events.
-  events: Observable<Event>;
-  // Hide the modal.
-  hide: () => Promise<void>;
-  // Use this to update the modal's positioning when it's likely that the content has changed its height.
-  handleUpdate: () => void;
-}
+- `animation?: boolean`
+- `html?: boolean`  
+Note this will always be set to true if you use templates.
+- `delay?: number | {show: number, hide: number}`
+- `container?: string | HTMLElement | false`
+- `placement?: string | ((popupEl: HTMLElement, triggerEl: HTMLElement) => string)`
+- `template?: string`
+- `offset?: number | string`
+- `fallbackPlacement?: string | string[]`
+- `boundary?: string | HTMLElement`
+- `trigger?: string`
+- `sanitize?: boolean`
+- `sanitizeFn?: (content: string) => string`  
+Note that if you do not provide a function, the directives will use `DomSanitizer.sanitize` by default.
+
+## const NGX_BOOTSTRAP_POPUP_OPTIONS: InjectionToken<IPopupOptions>
+The injection token for providing a set of default options for all popups in a module or component. Example...
+
+```ts
+import { 
+  NgxBootstrapPopupModule, 
+  NGX_BOOTSTRAP_POPUP_OPTIONS 
+} from '@nowzoo/ngx-bootstrap-popup';
+
+@NgModule({
+  //...
+  imports: [
+    NgxBootstrapPopupModule
+  ],
+  providers: [
+    { provide: NGX_BOOTSTRAP_POPUP_OPTIONS, useValue: {container: 'body'} }
+  ]
+})
+export class MyModule { }
+
 ```
+
+### NgxBootstrapPopoverDirective
+
+The directive for popovers.
+
+- selector: `'[ngxBootstrapPopover]'`,
+- exportAs: `'ngxBootstrapPopover'`
+- Inputs:
+  - `popoverTitle: string | TemplateRef<any>`
+  - `popoverContent: string | TemplateRef<any>`
+  - `popoverEnabled: boolean`  
+  Optional. Default `true`.
+  - `popoverDismissOnClickOutside`  
+  Optional. Default `true`.
+  - `popoverOptions: IPopupOptions`   
+  Optional. Note that most options can also be set with `data-` attributes.
+- Outputs:
+  - `popoverEvents: EventEmitter<Event>`  
+  The native Bootstrap events.
+- Properties:
+  - `bsInstance: any`  
+  The native popover data provided by Bootstrap.
+  - `tip: HTMLElement`  
+  The HTML Element of the popover.
+- Methods:
+  - `show(): void`
+  - `hide(): void`
+  - `toggle(): void`
+  - `enable(): void`
+  - `disable(): void`
+  - `toggleEnabled(): void`
+  - `update(): void`
+
+### NgxBootstrapTooltipDirective
+
+The directive for tooltips.
+
+- selector: `'[ngxBootstrapTooltip]'`,
+- exportAs: `'ngxBootstrapTooltip'`
+- Inputs:
+  - `tooltipTitle: string | TemplateRef<any>`
+  - `tooltipEnabled: boolean`  
+  Optional. Default `true`.
+  - `tooltipDismissOnClickOutside`  
+  Optional. Default `true`.
+  - `tooltipOptions: IPopupOptions`   
+  Optional. Note that most options can also be set with `data-` attributes.
+- Outputs:
+  - `tooltipEvents: EventEmitter<Event>`  
+  The native Bootstrap tooltip events.
+- Properties:
+  - `bsInstance: any`  
+  The native tooltip data provided by Bootstrap.
+  - `tip: HTMLElement`  
+  The HTML Element of the tooltip.
+- Methods:
+  - `show(): void`
+  - `hide(): void`
+  - `toggle(): void`
+  - `enable(): void`
+  - `disable(): void`
+  - `toggleEnabled(): void`
+  - `update(): void`
+
 
 ## Development
 
-Contributions are welcome. This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.0.
+Contributions are welcome. 
 
 ```bash
-git clone https://github.com/nowzoo/ngx-bootstrap-modal.git
+git clone https://github.com/nowzoo/ngx.git
 npm i
 ```
 
-The library code is located in `projects/ngx-bootstrap-modal`.
+The library code is located in `projects/ngx-bootstrap-popup`.
 
 To run tests:
-  - `ng test ngx-bootstrap-modal`
-  - or use the `wallaby.js` file at `projects/ngx-bootstrap-modal/wallaby.js`
+  - `ng test ngx-bootstrap-popup`
+  - or use the `wallaby.js` file at `projects/ngx-bootstrap-popup/wallaby.js`
 
-Build the library with `ng build ngx-bootstrap-modal`.
+Build the library with `ng build ngx-bootstrap-popup`.
 
-The demo project is located at `projects/ngx-bootstrap-modal-demo`.
 
-Serve the demo:
-
-```bash 
-ng serve ngx-bootstrap-modal-demo --open
-```
-
-Note that you have to build the library for any changes to show up in the demo app. This does not happen automatically.  
 
 
 ## License
 
-[MIT](https://github.com/nowzoo/ngx-bootstrap-modal/blob/master/LICENSE)
+MIT

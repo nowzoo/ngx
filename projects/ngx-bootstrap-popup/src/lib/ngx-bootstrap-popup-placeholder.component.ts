@@ -1,4 +1,4 @@
-import { Component, TemplateRef, ElementRef, ViewChild, Output, EventEmitter} from '@angular/core';
+import { Component, TemplateRef, ElementRef, ViewChild, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'ngx-bootstrap-popup-placeholder',

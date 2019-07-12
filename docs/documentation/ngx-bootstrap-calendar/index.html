@@ -1,0 +1,208 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@nowzoo/ngx-bootstrap-calendar documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	      <link rel="stylesheet" href="./styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="./" class="navbar-brand">@nowzoo/ngx-bootstrap-calendar documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content getting-started">
+                   <div class="content-data">
+
+<h1 id="nowzoongx-bootstrap-calendar">@nowzoo/ngx-bootstrap-calendar</h1>
+<p>Bootstrap 4 calendar inputs for Angular.</p>
+<h2 id="quick-start">Quick Start</h2>
+<p>Install the library and its dependencies...</p>
+<div><pre class="line-numbers"><code class="language-bash">npm i -S &#64;nowzoo/ngx-bootstrap-calendar &#64;nowzoo/ngx-date-time-inputs &#64;nowzoo/ngx-bootstrap-modal lodash jquery bootstrap moment ngx-moment &#64;fortawesome/angular-fontawesome &#64;fortawesome/fontawesome-svg-core &#64;fortawesome/free-solid-svg-icons</code></pre></div><p>Include the Bootstrap dependencies in some way in your build, for example via <code>angular.json</code>...</p>
+<div><pre class="line-numbers"><code class="language-json">&quot;styles&quot;: [
+  &quot;node_modules/bootstrap/dist/css/bootstrap.min.css&quot;
+],
+&quot;scripts&quot;: [
+  &quot;node_modules/jquery/dist/jquery.slim.min.js&quot;,
+  &quot;node_modules/bootstrap/dist/js/bootstrap.bundle.min.js&quot;
+],</code></pre></div><p><strong>Note:</strong> In the above example we use <code>bootstrap.bundle.min.js</code>, which includes <code>popper.js</code>. If you don&#39;t use the bundle version you have to install and add <code>popper.js</code>.</p>
+<p>Import the module...</p>
+<div><pre class="line-numbers"><code class="language-ts">//...
+import { 
+  NgxBootstrapCalendarModule 
+} from &#39;&#64;nowzoo/ngx-bootstrap-calendar&#39;;
+
+&#64;NgModule({
+  //...
+  imports: [
+    NgxBootstrapCalendarModule
+  ]
+})
+export class MyModule { }</code></pre></div><p>Use the components.</p>
+<div><pre class="line-numbers"><code class="language-html">&lt;!-- control with input and modal... --&gt;
+&lt;label [attr.for]=&quot;id + &#39;date&#39;&quot;&gt;Date&lt;/label&gt;
+  &lt;ngx-bootstrap-calendar-control 
+  [inputId]=&quot;id + &#39;date&#39;&quot; 
+  [formControl]=&quot;fc&quot;&gt;&lt;ngx-bootstrap-calendar-control&gt;
+
+&lt;!-- inline calendar --&gt;
+&lt;ngx-bootstrap-calendar [(selected)]=&quot;inlineValue&quot;&gt;&lt;/ngx-bootstrap-calendar&gt;
+&lt;pre&gt;Current Value: {{inlineValue}}&lt;/pre&gt;
+
+&lt;!-- modal calendar --&gt;
+&lt;ngx-bootstrap-calendar-modal 
+  #cal=&quot;ngxBootstrapCalendarModal&quot; 
+  [(selected)]=&quot;modalValue&quot;&gt;&lt;/ngx-bootstrap-calendar-modal&gt;
+
+Current Value: {{modalValue}} 
+&lt;button (click)=&quot;cal.show()&quot; class=&quot;btn btn-primary btn-sm&quot; &gt;Edit...&lt;/button&gt;
+</code></pre></div><h2 id="public-api">Public API</h2>
+<h3 id="calendarcomponent">CalendarComponent</h3>
+<p>A component that displays a calendar inline.</p>
+<ul>
+<li>selector: <code>ngx-bootstrap-calendar</code></li>
+<li>exportAs: <code>ngxBootstrapCalendar</code></li>
+</ul>
+<h4 id="inputs">Inputs</h4>
+<ul>
+<li><code>selected: string</code><br>Optional. The currently selected date in <code>YYYY-MM-DD</code> format.</li>
+<li><code>min: string</code><br>Optional. The min date (inclusive) in <code>YYYY-MM-DD</code> format.</li>
+<li><code>max: string</code><br>Optional. The max date (inclusive) in <code>YYYY-MM-DD</code> format.</li>
+</ul>
+<h4 id="outputs">Outputs</h4>
+<ul>
+<li><code>selectedChange: EventEmitter&lt;string&gt;</code> Emits the current value in <code>YYYY-MM-DD</code> format. Note that you can use &quot;banana in a box&quot; syntax instead: <code>[(selected)]=&quot;myValue&quot;</code>.</li>
+<li><code>monthChange: EventEmitter&lt;moment.Moment&gt;</code> Emitted when the displayed month (therefore possibly the height of the component) changes. Used by the modal component (see below) to ensure the modal is correctly positioned.</li>
+</ul>
+<h3 id="calendarmodalcomponent">CalendarModalComponent</h3>
+<p>A component that wraps a calendar in a Bootstrap modal.</p>
+<ul>
+<li>selector: <code>ngx-bootstrap-calendar-modal</code></li>
+<li>exportAs: <code>ngxBootstrapCalendarModal</code></li>
+</ul>
+<h4 id="inputs-1">Inputs</h4>
+<ul>
+<li><code>selected: string</code><br>Optional. The date value in <code>YYYY-MM-DD</code> format.</li>
+<li><code>min: string</code><br>Optional. The min date (inclusive) in <code>YYYY-MM-DD</code> format.</li>
+<li><code>max: string</code><br>Optional. The max date (inclusive) in <code>YYYY-MM-DD</code> format.</li>
+</ul>
+<h4 id="outputs-1">Outputs</h4>
+<ul>
+<li><code>selectedChange: EventEmitter&lt;string&gt;</code><br>Emits the current value in <code>YYYY-MM-DD</code> format. Note that you can use &quot;banana in a box&quot; syntax instead: <code>[(selected)]=&quot;myValue&quot;</code>.</li>
+</ul>
+<h4 id="methods">Methods</h4>
+<ul>
+<li><code>show(): void</code><br>Shows the modal.</li>
+</ul>
+<h3 id="calendarcontrolcomponent">CalendarControlComponent</h3>
+<p>A control component that implements <code>ControlValueAccessor</code> -- i.e. for use wih reactive form controls or template forms. It includes a text input for the date and a button to open a modal calendar.  The text input displays the date in a locale-aware format and is forgiving of various date formats that a user may enter. </p>
+<p><strong>Note:</strong> The model value is expected to be a string in the format <code>YYYY-MM-DD</code></p>
+<p><strong>Note:</strong> The min and max inputs only constrain the date in the calendar modal. The user may enter any date in the text box. Therefore, you must also provide min/max validation on your form control.</p>
+<ul>
+<li>selector: <code>ngx-bootstrap-calendar-control</code></li>
+</ul>
+<h4 id="inputs-2">Inputs</h4>
+<ul>
+<li><code>min: string</code><br>Optional. The min date (inclusive) in <code>YYYY-MM-DD</code> format.</li>
+<li><code>max: string</code><br>Optional. The max date (inclusive) in <code>YYYY-MM-DD</code> format. </li>
+<li><code>displayFormat: string</code><br>Optional. The date format displayed in the text input. Default: <code>&#39;LL&#39;</code>.</li>
+<li><code>inputPlaceholder: string</code><br>Optional. The placeholder for the text input.  Also used as the modal calendar title. Default: <code>&#39;Enter a date&#39;</code>.</li>
+<li><code>boostrapSize: &#39;sm&#39; | &#39;lg&#39;</code><br>Optional. used to set the input group class. Default: <code>null</code>.</li>
+<li><code>invalid: boolean</code><br>Optional. Pass this input if you want the Bootstrap <code>.is-invalid</code> class added to the text input based on your validation. </li>
+</ul>
+<h2 id="development">Development</h2>
+<p>Contributions are welcome. </p>
+<div><pre class="line-numbers"><code class="language-bash">git clone https://github.com/nowzoo/ngx.git
+npm i</code></pre></div><p>The library code is located in <code>projects/ngx-bootstrap-calendar</code>.</p>
+<p>To run tests:</p>
+<ul>
+<li><code>ng test ngx-bootstrap-calendar</code></li>
+<li>or use the <code>wallaby.js</code> file at <code>projects/ngx-bootstrap-calendar/wallaby.js</code></li>
+</ul>
+<p>Build the library with <code>ng build ngx-bootstrap-calendar</code>.</p>
+<h2 id="license">License</h2>
+<p>MIT</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
+            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+       </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="./js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="./js/menu-wc.js" defer></script>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+       <script src="./js/libs/zepto.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

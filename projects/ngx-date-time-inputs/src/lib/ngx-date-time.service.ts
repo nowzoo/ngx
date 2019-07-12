@@ -91,7 +91,7 @@ export class NgxDateTimeService {
 
 
   parseTime(timeStr: string): TimeParseResult {
-    let rxResult;
+    let rxResult: any;
     let meridian: string = null;
     if (/am/i.test(timeStr)) {
       meridian = 'am';

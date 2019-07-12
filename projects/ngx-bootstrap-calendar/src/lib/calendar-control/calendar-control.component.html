@@ -1,0 +1,22 @@
+<div [attr.class]="inputGroupClass">
+  <input #input 
+    [attr.id]="inputId" type="text" 
+    class="form-control" 
+    [attr.placeholder]="inputPlaceholder"
+    [attr.aria-label]="inputPlaceholder" 
+    [formControl]="control" 
+    (blur)="handleInputChange()"
+    (keyup.enter)="input.blur()">
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="button" title="Show Calendar" (click)="cal.show()">
+      <fa-icon [icon]="['fas', 'calendar']" [fixedWidth]="true"></fa-icon>
+      <span class="sr-only">Show Calendar</span>
+    </button>
+  </div>
+</div>
+<ngx-bootstrap-calendar-modal 
+  #cal="ngxBootstrapCalendarModal"
+  [min]="min" 
+  [max]="max" 
+  [selected]="selectedDateForCal" 
+  (selectedChange)="onCalendarSelected($event)"></ngx-bootstrap-calendar-modal>

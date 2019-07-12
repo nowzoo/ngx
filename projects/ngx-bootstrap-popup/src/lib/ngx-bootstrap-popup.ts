@@ -45,7 +45,8 @@ export abstract class NgxBootstrapPopup implements OnInit, OnDestroy {
     private _elementRef: ElementRef,
     private _cfr: ComponentFactoryResolver,
     private _vcr: ViewContainerRef,
-    private _sanitizer: DomSanitizer
+    private _sanitizer: DomSanitizer,
+    private _defaultOptions: IPopupOptions
   ) {
     this.events = new EventEmitter();
   }
@@ -72,6 +73,18 @@ export abstract class NgxBootstrapPopup implements OnInit, OnDestroy {
 
   get bsInstance(): any {
     return this.$el.data('bs.' + this.popupType);
+  }
+
+  get tip(): HTMLElement {
+    const instance = this.bsInstance;
+    if (! instance) {
+      return null;
+    }
+    return instance.tip;
+  }
+
+  get defaultOptions() {
+    return this._defaultOptions || {};
   }
 
   get showing(): boolean {
@@ -102,12 +115,15 @@ export abstract class NgxBootstrapPopup implements OnInit, OnDestroy {
     }
   }
 
+  sanitize(content: string) {
+    return this.sanitizer.sanitize(SecurityContext.HTML, content);
+  }
+
   create() {
     this.bsEventListener = ((event: Event) => {
       if (this.dismissOnClickOutside && event.type === 'shown') {
-        this.clickDismissListener = ((clickEvent: Event) => {
-
-          if ((clickEvent.target as any).nodeType && this.bsInstance.tip.contains(clickEvent.target)) {
+        this.clickDismissListener = ((clickEvent: MouseEvent) => {
+          if ((clickEvent.target as any).nodeType && this.tip && this.tip.contains(clickEvent.target as any)) {
             return;
           }
           jQuery(window).off('click focusin', this.clickDismissListener);
@@ -134,7 +150,7 @@ export abstract class NgxBootstrapPopup implements OnInit, OnDestroy {
   }
 
   getOptions(): any {
-    const options: any = Object.assign({}, this.options);
+    const options: any = Object.assign({}, this.defaultOptions, this.options);
     if (this.title) {
       this._titleComponentRef = this.getPlaceholderComponent();
       this.titleComponentRef.instance.inserted = this.title;
@@ -148,9 +164,7 @@ export abstract class NgxBootstrapPopup implements OnInit, OnDestroy {
       options.html = true;
     }
     if (! options.sanitizeFn) {
-      options.sanitizeFn = (content: any) => {
-        return this.sanitizer.sanitize(SecurityContext.HTML, content);
-      };
+      options.sanitizeFn = this.sanitize.bind(this);
     }
     return options;
   }

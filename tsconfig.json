@@ -57,22 +57,22 @@
       "ngx-form/*": [
         "dist/ngx-form/*"
       ],
-      "ngx-message": [
+      "@nowzoo/ngx-message": [
         "dist/ngx-message"
       ],
-      "ngx-message/*": [
+      "@nowzoo/ngx-message/*": [
         "dist/ngx-message/*"
       ],
-      "ngx-list": [
+      "@nowzoo/ngx-list": [
         "dist/ngx-list"
       ],
-      "ngx-list/*": [
+      "@nowzoo/ngx-list/*": [
         "dist/ngx-list/*"
       ],
-      "ngx-firebase-auth": [
+      "@nowzoo/ngx-firebase-auth": [
         "dist/ngx-firebase-auth"
       ],
-      "ngx-firebase-auth/*": [
+      "@nowzoo/ngx-firebase-auth/*": [
         "dist/ngx-firebase-auth/*"
       ],
       "@nowzoo/ngx-date-time-inputs": [
@@ -81,16 +81,16 @@
       "@nowzoo/ngx-date-time-inputs/*": [
         "dist/ngx-date-time-inputs/*"
       ],
-      "ngx-color-control": [
+      "@nowzoo/ngx-color-control": [
         "dist/ngx-color-control"
       ],
-      "ngx-color-control/*": [
+      "@nowzoo/ngx-color-control/*": [
         "dist/ngx-color-control/*"
       ],
-      "ngx-bootstrap-popup": [
+      "@nowzoo/ngx-bootstrap-popup": [
         "dist/ngx-bootstrap-popup"
       ],
-      "ngx-bootstrap-popup/*": [
+      "@nowzoo/ngx-bootstrap-popup/*": [
         "dist/ngx-bootstrap-popup/*"
       ],
       "@nowzoo/ngx-bootstrap-modal": [
@@ -98,6 +98,14 @@
       ],
       "@nowzoo/ngx-bootstrap-modal/*": [
         "dist/ngx-bootstrap-modal/*"
+      ],
+      "@nowzoo/ngx-bootstrap-calendar": [
+        "dist/ngx-bootstrap-calendar",
+        "dist/ngx-bootstrap-calendar"
+      ],
+      "@nowzoo/ngx-bootstrap-calendar/*": [
+        "dist/ngx-bootstrap-calendar/*",
+        "dist/ngx-bootstrap-calendar/*"
       ]
     }
   }

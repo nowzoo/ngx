@@ -1,0 +1,17 @@
+<p>
+  <button class="btn btn-primary" 
+    ngxBootstrapTooltip [tooltipTitle]="tooltipTitle" 
+    (tooltipEvents)="onTooltipEvent($event)">
+    Tooltip from Template
+  </button>
+  <ng-template #tooltipTitle>
+    <div class="d-flex justify-content-between align-items-center">
+      Opened {{counter}} times.
+      <span class="badge badge-primary ml-2">
+        open for
+        {{timer}}s
+      </span>
+    </div>
+  </ng-template>
+  
+</p>

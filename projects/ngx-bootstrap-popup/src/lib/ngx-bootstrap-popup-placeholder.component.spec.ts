@@ -9,7 +9,7 @@ import { TemplateRef, Component, ViewChild } from '@angular/core';
   styles: [':host {display: none;}']
 })
 class FakeComponent {
-  @ViewChild('fakeTemplate') fakeTemplate: TemplateRef<any>;
+  @ViewChild('fakeTemplate', {static: true}) fakeTemplate: TemplateRef<any>;
 }
 
 import { NgxBootstrapPopupPlaceholderComponent } from './ngx-bootstrap-popup-placeholder.component';

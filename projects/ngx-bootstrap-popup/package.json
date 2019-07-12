@@ -2,20 +2,19 @@
   "name": "@nowzoo/ngx-bootstrap-popup",
   "version": "8.0.0",
   "peerDependencies": {
-    "@angular/common": "^8.0.0",
-    "@angular/core": "^8.0.0",
-    "@angular/cdk": "^8.0.0",
+    "@angular/common": "^8.1.0",
+    "@angular/core": "^8.1.0",
+    "@angular/cdk": "^8.0.2",
     "bootstrap": "^4.3.1",
-		"jquery": "^3.3.1",
-		"popper.js": "^1.14.7"
+		"jquery": "^3.4.1"
   },
   "description": "A minimal library for implementing Bootstrap 4 popovers and tooltips in Angular.",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nowzoo/ngx-bootstrap-popup"
+    "url": "https://github.com/nowzoo/ngx"
   },
-  "bugs": "https://github.com/nowzoo/ngx-bootstrap-popup/issues",
-  "homepage": "https://nowzoo.github.io/ngx-bootstrap-popup"
+  "bugs": "https://github.com/nowzoo/ngx/issues",
+  "homepage": "https://nowzoo.github.io/ngx"
 
 }

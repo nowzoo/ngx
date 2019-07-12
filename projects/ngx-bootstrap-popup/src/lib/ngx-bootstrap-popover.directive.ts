@@ -11,14 +11,17 @@ import {
   ViewContainerRef,
   SimpleChanges,
   EventEmitter,
+  Inject,
+  Optional
 } from '@angular/core';
 
 import { NgxBootstrapPopup } from './ngx-bootstrap-popup';
-import { IPopupOptions } from './shared';
+import { IPopupOptions, NGX_BOOTSTRAP_POPUP_OPTIONS } from './shared';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Directive({
-  selector: '[ngxBootstrapPopover]'
+  selector: '[ngxBootstrapPopover]',
+  exportAs: 'ngxBootstrapPopover'
 })
 export class NgxBootstrapPopoverDirective extends NgxBootstrapPopup implements OnInit, OnChanges, OnDestroy {
   @Input() popoverTitle: string | TemplateRef<any>;
@@ -32,9 +35,10 @@ export class NgxBootstrapPopoverDirective extends NgxBootstrapPopup implements O
     elementRef: ElementRef,
     cfr: ComponentFactoryResolver,
     vcr: ViewContainerRef,
-    sanitizer: DomSanitizer
+    sanitizer: DomSanitizer,
+    @Optional() @Inject(NGX_BOOTSTRAP_POPUP_OPTIONS) defaultOptions: IPopupOptions
   ) {
-    super(elementRef, cfr, vcr, sanitizer);
+    super(elementRef, cfr, vcr, sanitizer, defaultOptions || {});
     this.popoverEvents = this.events;
   }
   get popupType(): 'popover' | 'tooltip' {

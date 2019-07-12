@@ -83,6 +83,10 @@ gulp.task('build:ngx-bootstrap-modal', (cb) => {
   buildLib('ngx-bootstrap-modal', cb);
 });
 
+gulp.task('build:ngx-bootstrap-calendar', (cb) => {
+  buildLib('ngx-bootstrap-calendar', cb);
+});
+
 
 
 gulp.task('cov', () => {

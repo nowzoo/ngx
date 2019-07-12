@@ -2,6 +2,7 @@ import { NgxBootstrapPopup } from './ngx-bootstrap-popup';
 import { Directive, EventEmitter } from '@angular/core';
 import * as jQuery from 'jquery';
 import * as bootstrap from 'bootstrap';
+// import { SecurityContext } from '@angular/compiler/src/core';
 
 @Directive({
   selector: '[ngxFakePopup]'
@@ -39,6 +40,7 @@ describe('NgxBootstrapPopup', () => {
   let elementRef;
   let cfr: any;
   let vcr: any;
+  let sanitizer: any;
   (window as any).jQuery = jQuery;
   (window as any).bootstrap = bootstrap;
   beforeEach(() => {
@@ -46,7 +48,8 @@ describe('NgxBootstrapPopup', () => {
     elementRef = {nativeElement: el};
     cfr = {};
     vcr = {};
-    directive = new FakePopupDirective(elementRef, cfr, vcr);
+    sanitizer = { sanitize: jasmine.createSpy().and.callFake(val => val) };
+    directive = new FakePopupDirective(elementRef, cfr, vcr, sanitizer);
   });
   it('should create an instance', () => {
     expect(directive).toBeTruthy();
@@ -61,6 +64,12 @@ describe('NgxBootstrapPopup', () => {
     });
     it('should have el', () => {
       expect(directive.el).toBe(elementRef.nativeElement);
+    });
+    it('should have sanitizer', () => {
+      expect(directive.sanitizer).toBe(sanitizer);
+    });
+    it('should have tip', () => {
+      expect(directive.tip).toBe(null);
     });
     it('should have $el', () => {
       expect(directive.$el).toBeTruthy();
@@ -294,6 +303,13 @@ describe('NgxBootstrapPopup', () => {
     });
   });
 
+  describe('sanitize', () => {
+    it ('should sanitize', () => {
+      directive.sanitize('foo');
+      expect(sanitizer.sanitize).toHaveBeenCalledWith(1, 'foo');
+    });
+  });
+
   describe('create()', () => {
     let bsOptions;
     let lastEvent;
@@ -319,23 +335,25 @@ describe('NgxBootstrapPopup', () => {
       expect(directive.showing).toBe(false);
       expect(directive.clickDismissListener).toBe(null);
     });
+
     describe('handling clicks', () => {
-      let bsInstance;
-      let tipEl$;
-      let innerTipEl$;
-      let outerEl$;
+      let tip: Node;
+      let innerTip: HTMLElement;
+      let outside: HTMLElement;
+      let clickEvent: Event;
       beforeEach(() => {
-        tipEl$ = (window as any).jQuery('<div></div>');
-        innerTipEl$ = (window as any).jQuery('<div>In</div>');
-        tipEl$.append(innerTipEl$);
-        outerEl$ = (window as any).jQuery('<div>Out</div>');
-        (window as any).jQuery('body').append(outerEl$);
-        (window as any).jQuery('body').append(tipEl$);
-        bsInstance = {tip: tipEl$.get(0)};
-        spyOnProperty(directive, 'bsInstance').and.returnValue(bsInstance);
+        tip = document.createElement('div');
+        innerTip = document.createElement('div');
+        tip.appendChild(innerTip);
+        outside = document.createElement('div');
+        document.body.appendChild(tip);
+        document.body.appendChild(outside);
+        spyOnProperty(directive, 'tip').and.returnValue(tip);
         directive.create();
         directive.$el.trigger('show');
         directive.$el.trigger('shown');
+        clickEvent = document.createEvent('MouseEvent');
+        clickEvent.initEvent('click');
       });
       describe('if dismissOnClickOutside is true', () => {
         beforeEach(() => {
@@ -343,13 +361,12 @@ describe('NgxBootstrapPopup', () => {
           spyOnProperty(directive, 'dismissOnClickOutside').and.returnValue(true);
         });
         it('should call hide if the click is outside', () => {
-          console.log(directive.bsInstance.tip);
-          outerEl$.trigger('click');
+          console.log(directive.tip);
+          (window as any).jQuery(outside).trigger('click');
           expect(directive.hide).toHaveBeenCalled();
         });
         it('should not call hide if the click is inside', () => {
-          console.log(directive.bsInstance.tip);
-          innerTipEl$.trigger('click');
+          (window as any).jQuery(innerTip).trigger('click');
           expect(directive.hide).not.toHaveBeenCalled();
         });
 

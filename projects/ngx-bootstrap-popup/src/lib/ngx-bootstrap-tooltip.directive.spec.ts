@@ -2,17 +2,19 @@ import { NgxBootstrapTooltipDirective } from './ngx-bootstrap-tooltip.directive'
 
 describe('NgxBootstrapTooltipDirective', () => {
   let el: HTMLElement;
-  let elementRef;
+  let elementRef: any;
   let cfr: any;
   let vcr: any;
   let directive: NgxBootstrapTooltipDirective;
+  let sanitizer: any;
 
   beforeEach(() => {
     el = document.createElement('button');
     elementRef = {nativeElement: el};
     cfr = {};
     vcr = {};
-    directive = new NgxBootstrapTooltipDirective(elementRef, cfr, vcr);
+    sanitizer = {sanitize: jasmine.createSpy().and.callFake(val => val)};
+    directive = new NgxBootstrapTooltipDirective(elementRef, cfr, vcr, sanitizer);
   });
   it('should create an instance', () => {
     expect(directive).toBeTruthy();

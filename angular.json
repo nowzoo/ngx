@@ -45,9 +45,14 @@
     },
     "ngx-fire": {
       "projectType": "library",
+      "prefix": "ngx",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
       "root": "projects/ngx-fire",
       "sourceRoot": "projects/ngx-fire/src",
-      "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
@@ -82,7 +87,12 @@
       "projectType": "library",
       "root": "projects/ngx-window-title",
       "sourceRoot": "projects/ngx-window-title/src",
-      "prefix": "lib",
+      "prefix": "ngx",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
@@ -115,9 +125,14 @@
     },
     "ngx-route-utils": {
       "projectType": "library",
+      "prefix": "ngx",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
       "root": "projects/ngx-route-utils",
       "sourceRoot": "projects/ngx-route-utils/src",
-      "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
@@ -150,9 +165,14 @@
     },
     "ngx-sign-in-redirect": {
       "projectType": "library",
+      "prefix": "ngx",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
       "root": "projects/ngx-sign-in-redirect",
       "sourceRoot": "projects/ngx-sign-in-redirect/src",
-      "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
@@ -187,7 +207,12 @@
       "projectType": "library",
       "root": "projects/ngx-form",
       "sourceRoot": "projects/ngx-form/src",
-      "prefix": "lib",
+      "prefix": "ngx",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
@@ -222,7 +247,12 @@
       "projectType": "library",
       "root": "projects/ngx-message",
       "sourceRoot": "projects/ngx-message/src",
-      "prefix": "lib",
+      "prefix": "ngx",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
@@ -257,7 +287,12 @@
       "projectType": "library",
       "root": "projects/ngx-list",
       "sourceRoot": "projects/ngx-list/src",
-      "prefix": "lib",
+      "prefix": "ngx",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
@@ -292,7 +327,12 @@
       "projectType": "library",
       "root": "projects/ngx-firebase-auth",
       "sourceRoot": "projects/ngx-firebase-auth/src",
-      "prefix": "lib",
+      "prefix": "ngx",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
@@ -327,7 +367,12 @@
       "projectType": "library",
       "root": "projects/ngx-date-time-inputs",
       "sourceRoot": "projects/ngx-date-time-inputs/src",
-      "prefix": "lib",
+      "prefix": "ngx",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
@@ -362,7 +407,12 @@
       "projectType": "library",
       "root": "projects/ngx-color-control",
       "sourceRoot": "projects/ngx-color-control/src",
-      "prefix": "lib",
+      "prefix": "ngx",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
@@ -397,7 +447,12 @@
       "projectType": "library",
       "root": "projects/ngx-bootstrap-popup",
       "sourceRoot": "projects/ngx-bootstrap-popup/src",
-      "prefix": "lib",
+      "prefix": "ngx",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
@@ -428,124 +483,16 @@
         }
       }
     },
-    "demo-date-time-inputs": {
-      "projectType": "application",
-      "schematics": {},
-      "root": "projects/demo-date-time-inputs",
-      "sourceRoot": "projects/demo-date-time-inputs/src",
-      "prefix": "app",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "dist/demo-date-time-inputs",
-            "index": "projects/demo-date-time-inputs/src/index.html",
-            "main": "projects/demo-date-time-inputs/src/main.ts",
-            "polyfills": "projects/demo-date-time-inputs/src/polyfills.ts",
-            "tsConfig": "projects/demo-date-time-inputs/tsconfig.app.json",
-            "aot": false,
-            "assets": [
-              "projects/demo-date-time-inputs/src/favicon.ico",
-              "projects/demo-date-time-inputs/src/assets"
-            ],
-            "styles": [
-              "projects/demo-date-time-inputs/src/styles.css"
-            ],
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "projects/demo-date-time-inputs/src/environments/environment.ts",
-                  "with": "projects/demo-date-time-inputs/src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "demo-date-time-inputs:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "demo-date-time-inputs:build:production"
-            }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "demo-date-time-inputs:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/demo-date-time-inputs/src/test.ts",
-            "polyfills": "projects/demo-date-time-inputs/src/polyfills.ts",
-            "tsConfig": "projects/demo-date-time-inputs/tsconfig.spec.json",
-            "karmaConfig": "projects/demo-date-time-inputs/karma.conf.js",
-            "assets": [
-              "projects/demo-date-time-inputs/src/favicon.ico",
-              "projects/demo-date-time-inputs/src/assets"
-            ],
-            "styles": [
-              "projects/demo-date-time-inputs/src/styles.css"
-            ],
-            "scripts": []
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/demo-date-time-inputs/tsconfig.app.json",
-              "projects/demo-date-time-inputs/tsconfig.spec.json",
-              "projects/demo-date-time-inputs/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "projects/demo-date-time-inputs/e2e/protractor.conf.js",
-            "devServerTarget": "demo-date-time-inputs:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "demo-date-time-inputs:serve:production"
-            }
-          }
-        }
-      }
-    },
     "ngx-bootstrap-modal": {
       "projectType": "library",
       "root": "projects/ngx-bootstrap-modal",
       "sourceRoot": "projects/ngx-bootstrap-modal/src",
-      "prefix": "lib",
+      "prefix": "ngx",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
@@ -695,7 +642,48 @@
           }
         }
       }
+    },
+    "ngx-bootstrap-calendar": {
+      "projectType": "library",
+      "root": "projects/ngx-bootstrap-calendar",
+      "sourceRoot": "projects/ngx-bootstrap-calendar/src",
+      "prefix": "ngx",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-bootstrap-calendar/tsconfig.lib.json",
+            "project": "projects/ngx-bootstrap-calendar/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-bootstrap-calendar/src/test.ts",
+            "tsConfig": "projects/ngx-bootstrap-calendar/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-bootstrap-calendar/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-bootstrap-calendar/tsconfig.lib.json",
+              "projects/ngx-bootstrap-calendar/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
+    
   },
   "defaultProject": "ngx-crumbs"
 }

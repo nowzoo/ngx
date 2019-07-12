@@ -1,0 +1,8 @@
+<div class="form-group">
+  <label [attr.for]="id + 'date'">Date</label>
+  <ngx-date-input 
+    [formControl]="control" 
+    [inputId]="id + 'date'"
+    [inputClass]="'form-control' + (control.valid ? '' : ' is-invalid')"></ngx-date-input>
+  <small class="form-text text-muted">Model Value: {{control.value}}</small>
+</div>
