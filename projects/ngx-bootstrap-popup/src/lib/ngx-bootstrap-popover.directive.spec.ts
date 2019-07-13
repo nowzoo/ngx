@@ -14,7 +14,7 @@ describe('NgxBootstrapPopoverDirective', () => {
     cfr = {};
     vcr = {};
     sanitizer = { sanitize: jasmine.createSpy().and.callFake(val => val) };
-    directive = new NgxBootstrapPopoverDirective(elementRef, cfr, vcr, sanitizer);
+    directive = new NgxBootstrapPopoverDirective(elementRef, cfr, vcr, sanitizer, {});
   });
   it('should create an instance', () => {
     expect(directive).toBeTruthy();

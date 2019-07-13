@@ -11,7 +11,8 @@ export class NgxBootstrapModalService {
   constructor(
     private _appRef: ApplicationRef,
     private _zone: NgZone
-  ) { }
+  ) {
+  }
 
   get appRef(): ApplicationRef {
     return this._appRef;
@@ -49,6 +50,7 @@ export class NgxBootstrapModalService {
     this.appRef.attachView(viewRef);
     const el = instance.modalEl = viewRef.rootNodes[0];
     document.body.appendChild(el);
+
     const $el = jQuery(el);
     $el.modal({show: false});
     $el.on('show.bs.modal shown.bs.modal hide.bs.modal hidden.bs.modal', (event: any) => {

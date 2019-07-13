@@ -9,7 +9,6 @@ describe('NgxBootstrapModalService', () => {
   beforeEach(() => {
 
     (window as any).jQuery = jQuery;
-    (window as any).bootstrap = bootstrap;
     TestBed.configureTestingModule({
     });
     service = TestBed.get(NgxBootstrapModalService);
@@ -33,8 +32,10 @@ describe('NgxBootstrapModalService', () => {
     let templateRef: any;
     let appRef: any;
     let el: HTMLElement;
+    let $el: any;
 
     beforeEach(() => {
+      $el = {modal: jasmine.createSpy()};
       el = document.createElement('div');
       appRef = {
         attachView: jasmine.createSpy(),

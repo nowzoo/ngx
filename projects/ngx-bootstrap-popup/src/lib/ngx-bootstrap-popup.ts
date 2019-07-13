@@ -46,7 +46,7 @@ export abstract class NgxBootstrapPopup implements OnInit, OnDestroy {
     private _cfr: ComponentFactoryResolver,
     private _vcr: ViewContainerRef,
     private _sanitizer: DomSanitizer,
-    private _defaultOptions: IPopupOptions
+    private _defaultOptions: IPopupOptions = {}
   ) {
     this.events = new EventEmitter();
   }
@@ -84,7 +84,7 @@ export abstract class NgxBootstrapPopup implements OnInit, OnDestroy {
   }
 
   get defaultOptions() {
-    return this._defaultOptions || {};
+    return this._defaultOptions;
   }
 
   get showing(): boolean {

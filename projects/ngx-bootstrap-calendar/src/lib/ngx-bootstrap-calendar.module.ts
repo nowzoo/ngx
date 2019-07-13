@@ -10,7 +10,7 @@ import { CalendarModalComponent } from './calendar-modal/calendar-modal.componen
 import { CalendarControlComponent } from './calendar-control/calendar-control.component';
 import { NgxBootstrapModalModule } from '@nowzoo/ngx-bootstrap-modal';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgxDateTimeInputsModule } from '@nowzoo/ngx-date-time-inputs';
+import { NgxDateTimeModule } from '@nowzoo/ngx-date-time';
 
 
 @NgModule({
@@ -25,7 +25,7 @@ import { NgxDateTimeInputsModule } from '@nowzoo/ngx-date-time-inputs';
     ReactiveFormsModule,
     FontAwesomeModule,
     NgxBootstrapModalModule,
-    NgxDateTimeInputsModule
+    NgxDateTimeModule
   ],
   exports: [
     CalendarComponent,

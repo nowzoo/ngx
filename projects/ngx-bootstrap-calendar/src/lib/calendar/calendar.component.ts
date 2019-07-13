@@ -1,13 +1,16 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import moment from 'moment';
-import {
-  MODEL_DATE_FORMAT,
-  NgxDateTimeUtils,
-  ICalendarDay
-} from '@nowzoo/ngx-date-time-inputs';
+import { MODEL_DATE_FORMAT } from '@nowzoo/ngx-date-time';
 
+import chunk from 'lodash/chunk';
 
-
+interface ICalendarDay {
+  m: moment.Moment;
+  disabled: boolean;
+  currentMonth: boolean;
+  today: boolean;
+  selected: boolean;
+}
 
 
 @Component({
@@ -17,6 +20,75 @@ import {
   styleUrls: ['./calendar.component.scss']
 })
 export class CalendarComponent implements OnInit {
+
+  /**
+   * The value as a string in `YYYY-MM-DD` format.
+   */
+  @Input()
+  set selected(selected: string) {
+    if ((!selected) || undefined === selected) {
+      this.selectedDate = null;
+    } else {
+      const m = moment(selected, MODEL_DATE_FORMAT);
+      if (m.isValid()) {
+        this.selectedDate = moment(m);
+        this.displayedMonth = moment(this.selectedDate).startOf('month');
+      } else {
+        this.selectedDate = null;
+      }
+    }
+
+    this.updateDisplayedMonth();
+  }
+
+  get selected(): string|null {
+    return this.selectedDate ? this.selectedDate.format(MODEL_DATE_FORMAT) : null;
+  }
+
+  /**
+   * Optional. The minimum date (inclusive) as a string in `YYYY-MM-DD` format.
+   */
+  @Input()
+  set min(min: string) {
+    if ((! min) || undefined === min) {
+      this.minDate = null;
+    } else {
+      const m = moment(min, MODEL_DATE_FORMAT);
+      if (m.isValid()) {
+        this.minDate = moment(m);
+      } else {
+        this.minDate = null;
+      }
+    }
+
+    this.updateDisplayedMonth();
+  }
+
+  get min(): string|null {
+    return this.minDate ? this.minDate.format(MODEL_DATE_FORMAT) : null;
+  }
+
+  /**
+   * Optional. The maximum date (inclusive) as a string in `YYYY-MM-DD` format.
+   */
+  @Input()
+  set max(max: string) {
+    if (!max) {
+      this.maxDate = null;
+    } else {
+      const m = moment(max, MODEL_DATE_FORMAT);
+      if (m.isValid()) {
+        this.maxDate = moment(m);
+      } else {
+        this.maxDate = null;
+      }
+    }
+    this.updateDisplayedMonth();
+  }
+
+  get max(): string|null {
+    return this.maxDate ? this.maxDate.format(MODEL_DATE_FORMAT) : null;
+  }
   /**
    * Used to generate a unique DOM id for the dropdowns.
    */
@@ -103,73 +175,29 @@ export class CalendarComponent implements OnInit {
    */
   @Output() monthChange: EventEmitter<moment.Moment> = new EventEmitter();
 
-  /**
-   * The value as a string in `YYYY-MM-DD` format.
-   */
-  @Input()
-  set selected(selected: string) {
-    if ((!selected) || undefined === selected) {
-      this.selectedDate = null;
-    } else {
-      const m = moment(selected, MODEL_DATE_FORMAT);
-      if (m.isValid()) {
-        this.selectedDate = moment(m);
-        this.displayedMonth = moment(this.selectedDate).startOf('month');
-      } else {
-        this.selectedDate = null;
-      }
+  static calendarDays(
+    year: number, month: number, selected: string = null, min: string = null, max: string = null
+  ): ICalendarDay[][] {
+    const days: ICalendarDay[] = [];
+    const monthStart = moment().year(year).month(month).startOf('month');
+    const selectedMoment = selected !== null ? moment(selected, MODEL_DATE_FORMAT) : null;
+    const minMoment = min !== null ? moment(min, MODEL_DATE_FORMAT) : null;
+    const maxMoment = max !== null ? moment(max, MODEL_DATE_FORMAT) : null;
+    const today = moment();
+    const otherDay = moment(monthStart).startOf('month').startOf('week');
+    const lastDayInCal = moment(monthStart).endOf('month').endOf('week');
+    while (otherDay.isSameOrBefore(lastDayInCal, 'day')) {
+      days.push({
+        m: moment(otherDay),
+        currentMonth: monthStart.isSame(otherDay, 'month'),
+        disabled: (minMoment !== null && minMoment.isValid() && otherDay.isBefore(minMoment, 'day')) ||
+          (maxMoment !== null && maxMoment.isValid() && otherDay.isAfter(maxMoment, 'day')),
+        today: today.isSame(otherDay, 'day'),
+        selected: selectedMoment && selectedMoment.isValid() && selectedMoment.isSame(otherDay, 'day')
+      });
+      otherDay.add(1, 'day');
     }
-
-    this.updateDisplayedMonth();
-  }
-
-  get selected(): string|null {
-    return this.selectedDate ? this.selectedDate.format(MODEL_DATE_FORMAT) : null;
-  }
-
-  /**
-   * Optional. The minimum date (inclusive) as a string in `YYYY-MM-DD` format.
-   */
-  @Input()
-  set min(min: string) {
-    if ((! min) || undefined === min) {
-      this.minDate = null;
-    } else {
-      const m = moment(min, MODEL_DATE_FORMAT);
-      if (m.isValid()) {
-        this.minDate = moment(m);
-      } else {
-        this.minDate = null;
-      }
-    }
-
-    this.updateDisplayedMonth();
-  }
-
-  get min(): string|null {
-    return this.minDate ? this.minDate.format(MODEL_DATE_FORMAT) : null;
-  }
-
-  /**
-   * Optional. The maximum date (inclusive) as a string in `YYYY-MM-DD` format.
-   */
-  @Input()
-  set max(max: string) {
-    if (!max) {
-      this.maxDate = null;
-    } else {
-      const m = moment(max, MODEL_DATE_FORMAT);
-      if (m.isValid()) {
-        this.maxDate = moment(m);
-      } else {
-        this.maxDate = null;
-      }
-    }
-    this.updateDisplayedMonth();
-  }
-
-  get max(): string|null {
-    return this.maxDate ? this.maxDate.format(MODEL_DATE_FORMAT) : null;
+    return chunk(days, 7);
   }
 
 
@@ -218,7 +246,7 @@ export class CalendarComponent implements OnInit {
     this.nextYearOption = moment(this.displayedMonth).add(1, 'year');
     this.prevMonthOption = moment(this.displayedMonth).subtract(1, 'month');
     this.nextMonthOption = moment(this.displayedMonth).add(1, 'month');
-    this.weeks = NgxDateTimeUtils.calendarDays(
+    this.weeks = CalendarComponent.calendarDays(
       this.displayedMonth.year(),
       this.displayedMonth.month(),
       this.selected,

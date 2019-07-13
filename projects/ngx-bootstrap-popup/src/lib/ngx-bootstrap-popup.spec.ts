@@ -2,7 +2,6 @@ import { NgxBootstrapPopup } from './ngx-bootstrap-popup';
 import { Directive, EventEmitter } from '@angular/core';
 import * as jQuery from 'jquery';
 import * as bootstrap from 'bootstrap';
-// import { SecurityContext } from '@angular/compiler/src/core';
 
 @Directive({
   selector: '[ngxFakePopup]'
@@ -37,7 +36,7 @@ export class FakePopupDirective extends NgxBootstrapPopup  {
 describe('NgxBootstrapPopup', () => {
   let directive: FakePopupDirective;
   let el: HTMLElement;
-  let elementRef;
+  let elementRef: any;
   let cfr: any;
   let vcr: any;
   let sanitizer: any;
@@ -49,7 +48,7 @@ describe('NgxBootstrapPopup', () => {
     cfr = {};
     vcr = {};
     sanitizer = { sanitize: jasmine.createSpy().and.callFake(val => val) };
-    directive = new FakePopupDirective(elementRef, cfr, vcr, sanitizer);
+    directive = new FakePopupDirective(elementRef, cfr, vcr, sanitizer, {});
   });
   it('should create an instance', () => {
     expect(directive).toBeTruthy();
@@ -70,6 +69,10 @@ describe('NgxBootstrapPopup', () => {
     });
     it('should have tip', () => {
       expect(directive.tip).toBe(null);
+    });
+    it('should have tip if there is an instance', () => {
+      spyOnProperty(directive, 'bsInstance').and.returnValue({tip: 'foo'});
+      expect(directive.tip).toBe('foo');
     });
     it('should have $el', () => {
       expect(directive.$el).toBeTruthy();

@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CalendarControlComponent } from './calendar-control.component';
-import { NgxDateTimeService, MODEL_DATE_FORMAT } from '@nowzoo/ngx-date-time-inputs';
+import {  MODEL_DATE_FORMAT } from '@nowzoo/ngx-date-time';
 import { FormControl } from '@angular/forms';
 
 describe('CalendarControlComponent', () => {
@@ -10,10 +10,7 @@ describe('CalendarControlComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CalendarControlComponent ],
-      providers: [
-        NgxDateTimeService
-      ]
+      declarations: [ CalendarControlComponent ]
     })
     .overrideTemplate(CalendarControlComponent, '')
     .compileComponents();
@@ -43,25 +40,7 @@ describe('CalendarControlComponent', () => {
     });
   });
 
-  describe('get inputGroupClass()', () => {
-    it('should respond to the bootstrapSize input', () => {
-      expect(component.inputGroupClass).toBe('input-group');
-      component.boostrapSize = 'lg';
-      expect(component.inputGroupClass).toBe('input-group input-group-lg');
-    });
-  });
 
-  describe('get inputClass()', () => {
-    it('should respond to the invalid input', () => {
-      expect(component.inputClass).toBe('form-control');
-      component.invalid = true;
-      expect(component.inputClass).toBe('form-control is-invalid');
-      component.invalid = false;
-      expect(component.inputClass).toBe('form-control');
-      component.invalid = undefined;
-      expect(component.inputClass).toBe('form-control');
-    });
-  });
 
   describe('get selectedDateForCal(): string', () => {
     it(' return a string', () => {
@@ -84,6 +63,7 @@ describe('CalendarControlComponent', () => {
       expect(component.propagateChange).toHaveBeenCalledWith('2019-07-01');
     });
   });
+
 
 
 });

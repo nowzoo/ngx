@@ -2,8 +2,6 @@
 
 A minimal library for implementing Bootstrap 4 modals in Angular. The library depends on the native Bootstrap and jQuery code.
 
-[Demo App](https://nowzoo.github.io/ngx-bootstrap-modal/) |
-[Demo App Code](https://github.com/nowzoo/ngx-bootstrap-modal/tree/master/projects/ngx-bootstrap-modal-demo)
 
 
 ## Quick Start
@@ -14,19 +12,19 @@ Install the library and its dependencies...
 npm i -S @nowzoo/ngx-bootstrap-modal jquery popper.js bootstrap
 ```
 
-Include the dependencies in some way in your build, for example via `angular.json`...
+Include the Boostrap dependencies in some way in your build, for example via `angular.json`...
 
 ```json
 "styles": [
-  "node_modules/bootstrap/dist/css/bootstrap.min.css",
-  "projects/ngx-bootstrap-modal-demo/src/styles.scss"
+  "node_modules/bootstrap/dist/css/bootstrap.min.css"
 ],
 "scripts": [
   "node_modules/jquery/dist/jquery.slim.min.js",
-  "node_modules/popper.js/dist/umd/popper.min.js",
-  "node_modules/bootstrap/dist/js/bootstrap.min.js"
+  "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
 ],
 ```
+
+**Note:** In the above example we use `bootstrap.bundle.min.js`, which includes `popper.js`. If you don't use the bundle version you have to install and add `popper.js`.
 
 Import the module...
 ```ts
@@ -147,32 +145,24 @@ interface INgxBootstrapModalInstance {
 
 ## Development
 
-Contributions are welcome. This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.0.
+Contributions are welcome. 
 
 ```bash
-git clone https://github.com/nowzoo/ngx-bootstrap-modal.git
+git clone https://github.com/nowzoo/ngx.git
 npm i
 ```
 
 The library code is located in `projects/ngx-bootstrap-modal`.
 
 To run tests:
-  - `ng test ngx-bootstrap-modal`
+  - `ng test ngx-date-time`
   - or use the `wallaby.js` file at `projects/ngx-bootstrap-modal/wallaby.js`
 
 Build the library with `ng build ngx-bootstrap-modal`.
 
-The demo project is located at `projects/ngx-bootstrap-modal-demo`.
 
-Serve the demo:
-
-```bash 
-ng serve ngx-bootstrap-modal-demo --open
-```
-
-Note that you have to build the library for any changes to show up in the demo app. This does not happen automatically.  
 
 
 ## License
 
-[MIT](https://github.com/nowzoo/ngx-bootstrap-modal/blob/master/LICENSE)
+MIT

@@ -14,7 +14,7 @@ describe('NgxBootstrapTooltipDirective', () => {
     cfr = {};
     vcr = {};
     sanitizer = {sanitize: jasmine.createSpy().and.callFake(val => val)};
-    directive = new NgxBootstrapTooltipDirective(elementRef, cfr, vcr, sanitizer);
+    directive = new NgxBootstrapTooltipDirective(elementRef, cfr, vcr, sanitizer, {});
   });
   it('should create an instance', () => {
     expect(directive).toBeTruthy();
