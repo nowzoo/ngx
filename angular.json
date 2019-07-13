@@ -363,46 +363,6 @@
         }
       }
     },
-    "ngx-date-time-inputs": {
-      "projectType": "library",
-      "root": "projects/ngx-date-time-inputs",
-      "sourceRoot": "projects/ngx-date-time-inputs/src",
-      "prefix": "ngx",
-      "schematics": {
-        "@schematics/angular:component": {
-          "styleext": "scss"
-        }
-      },
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/ngx-date-time-inputs/tsconfig.lib.json",
-            "project": "projects/ngx-date-time-inputs/ng-package.json"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/ngx-date-time-inputs/src/test.ts",
-            "tsConfig": "projects/ngx-date-time-inputs/tsconfig.spec.json",
-            "karmaConfig": "projects/ngx-date-time-inputs/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/ngx-date-time-inputs/tsconfig.lib.json",
-              "projects/ngx-date-time-inputs/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
     "ngx-color-control": {
       "projectType": "library",
       "root": "projects/ngx-color-control",

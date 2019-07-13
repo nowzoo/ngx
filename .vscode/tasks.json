@@ -5,7 +5,7 @@
   "tasks": [
     {
       "type": "gulp",
-      "task": "build:ngx-date-time-inputs",
+      "task": "build:ngx-date-time",
       "problemMatcher": []
     },
     {

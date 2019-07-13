@@ -5,8 +5,18 @@
   </p>
   <hr>
   <h4>Date Control</h4>
-  <demo-date></demo-date>
+  <div class="form-group">
+    <label [attr.for]="id + 'date'">Date</label>
+    <ngx-date-control [formControl]="dateControl" [inputId]="id + 'date'"
+      [inputClass]="'form-control' + (dateControl.valid ? '' : ' is-invalid')"></ngx-date-control>
+    <small class="form-text text-muted">Model Value: {{dateControl.value}}</small>
+  </div>
 
   <h4>Time Control</h4>
-  <demo-time></demo-time>
+  <div class="form-group">
+    <label [attr.for]="id + 'time'">Time</label>
+    <ngx-time-control [formControl]="timeControl" [inputId]="id + 'time'"
+      [inputClass]="'form-control' + (timeControl.valid ? '' : ' is-invalid')"></ngx-time-control>
+    <small class="form-text text-muted">Model Value: {{timeControl.value}}</small>
+  </div>
 </div>

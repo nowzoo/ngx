@@ -1,5 +1,6 @@
 import { NgxAbstractDateControl } from './ngx-abstract-date-control';
 import { MODEL_DATE_FORMAT } from './shared';
+import moment from 'moment';
 class InstanceComponent extends NgxAbstractDateControl {
   constructor() {
     super();
@@ -26,6 +27,11 @@ describe('NgxAbstractDateControl', () => {
       component.writeValue('2019-07-04');
       expect(component.date.format(MODEL_DATE_FORMAT)).toBe('2019-07-04');
       expect(component.control.value).toBe(component.date.format('LL'));
+    });
+    it('should set the value of the date and the control if passed a non parseable string', () => {
+      const now = moment();
+      component.writeValue('foo');
+      expect(component.control.value).toBe(now.format('LL'));
     });
   });
 

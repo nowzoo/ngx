@@ -107,10 +107,10 @@
         "dist/ngx-bootstrap-calendar/*",
         "dist/ngx-bootstrap-calendar/*"
       ],
-      "ngx-date-time": [
+      "@nowzoo/ngx-date-time": [
         "dist/ngx-date-time"
       ],
-      "ngx-date-time/*": [
+      "@nowzoo/ngx-date-time/*": [
         "dist/ngx-date-time/*"
       ]
     }

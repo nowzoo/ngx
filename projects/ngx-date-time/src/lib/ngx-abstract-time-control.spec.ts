@@ -1,5 +1,6 @@
 import { NgxAbstractTimeControl } from './ngx-abstract-time-control';
 import { MODEL_TIME_FORMAT } from './shared';
+import moment from 'moment';
 class InstanceComponent extends NgxAbstractTimeControl {
   constructor() {
     super();
@@ -26,6 +27,11 @@ describe('NgxAbstractTimeControl', () => {
       component.writeValue('09:30');
       expect(component.date.format(MODEL_TIME_FORMAT)).toBe('09:30');
       expect(component.control.value).toBe(component.date.format('LT'));
+    });
+    it('should set the value of the date and the control if passed a non parseable string', () => {
+      const now = moment();
+      component.writeValue('foo');
+      expect(component.control.value).toBe(now.format('LT'));
     });
   });
   describe('registerOnChange(fn: (_: any) => void)', () => {

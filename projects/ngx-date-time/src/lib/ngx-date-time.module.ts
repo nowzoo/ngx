@@ -1,12 +1,28 @@
 import { NgModule } from '@angular/core';
-import { NgxDateTimeComponent } from './ngx-date-time.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
+
+import { CommonModule } from '@angular/common';
+import { DateControlComponent } from './date-control/date-control.component';
+import { TimeControlComponent } from './time-control/time-control.component';
 
 
 @NgModule({
-  declarations: [NgxDateTimeComponent],
   imports: [
+    CommonModule,
+    ReactiveFormsModule,
+
   ],
-  exports: [NgxDateTimeComponent]
+  declarations: [
+    DateControlComponent,
+    TimeControlComponent,
+  ],
+  exports: [
+    DateControlComponent,
+    TimeControlComponent,
+  ],
+  providers: [  ]
 })
-export class NgxDateTimeModule { }
+export class NgxDateTimeModule {
+
+}

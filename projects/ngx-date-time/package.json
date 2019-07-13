@@ -1,8 +1,28 @@
 {
-  "name": "ngx-date-time",
-  "version": "0.0.1",
+  "name": "@nowzoo/ngx-date-time",
+  "version": "8.0.1",
+  "description": "Simple, extensible date and time controls and utilities. Forgiving and (more or less) locale-aware.",
+  "keywords": [
+    "angular",
+    "form",
+    "control",
+    "date",
+    "time"
+  ],
+  "homepage": "https://github.com/nowzoo/ngx/blob/master/projects/ngx-date-time/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nowzoo/ngx"
+  },
+  "bugs": {
+    "url": "https://github.com/nowzoo/ngx/issues"
+  },
+  "license": "MIT",
   "peerDependencies": {
-    "@angular/common": "^8.1.0",
-    "@angular/core": "^8.1.0"
+    "@angular/common": ">=6.0.0 <9",
+    "@angular/core": ">=6.0.0 <9",
+    "@angular/forms": ">=6.0.0 <9",
+    "lodash": "^4.17.11",
+    "moment": "^2.24.0"
   }
 }

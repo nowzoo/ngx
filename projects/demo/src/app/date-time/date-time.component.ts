@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'demo-date-time',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DateTimeComponent implements OnInit {
 
+  id = 'demo-date-time';
+  dateControl: FormControl;
+  timeControl: FormControl;
   constructor() { }
 
   ngOnInit() {
+    this.dateControl = new FormControl('2019-07-04');
+    this.timeControl = new FormControl('20:45');
   }
 
 }
