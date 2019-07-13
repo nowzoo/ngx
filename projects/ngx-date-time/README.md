@@ -1,7 +1,12 @@
 # @nowzoo/ngx-date-time
 
-Simple, extensible date and time controls and utilities. Forgiving and (more or less) locale-aware.
+Simple date and time controls and utilities. 
+- Extensible/
+- Forgiving of multiple date and time input formats.
+- (More or less) locale-aware.
 
+
+[Stackblitz demo](https://stackblitz.com/edit/ngx-date-time-controls-demo)
 
 ## Installation
 
