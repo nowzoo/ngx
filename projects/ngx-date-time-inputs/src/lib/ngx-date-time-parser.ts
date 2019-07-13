@@ -1,25 +1,10 @@
-import { Injectable } from '@angular/core';
 import moment from 'moment';
 import words from 'lodash/words';
+import { IDateParseResult, ITimeParseResult } from './shared';
 
+export class NgxDateTimeParser {
 
-
-export class DateParseResult {
-  year: number;
-  month: number;
-  date: number;
-}
-export class TimeParseResult {
-  hour: number;
-  minute: number;
-}
-@Injectable()
-export class NgxDateTimeService {
-
-  monthNamesRx: RegExp;
-  monthAbbrsRx: RegExp;
-
-  get monthsRx(): RegExp {
+  static monthsRx(): RegExp {
     let n: number;
     let m: any;
     const monthNames = [];
@@ -31,21 +16,21 @@ export class NgxDateTimeService {
     return new RegExp(monthNames.join('|'), 'gi');
   }
 
-  get isLocaleMonthFirst(): boolean  {
+  static isLocaleMonthFirst(): boolean {
     const m = moment('1965-12-22');
     const str = m.format('l');
     return str.indexOf('12') < str.indexOf('22');
   }
 
-
-  parseDate(dateStr: string): DateParseResult {
+  static parseDate(dateStr: string): IDateParseResult {
     const m = moment();
     const dateWords = words(dateStr);
-    const result = {year: null, month: null, date: null};
+    const result = { year: null, month: null, date: null };
     const unusedNumbers = [];
+    const monthsRx = NgxDateTimeParser.monthsRx();
     dateWords.forEach(word => {
       if (null === result.month) {
-        if (this.monthsRx.test(word)) {
+        if (monthsRx.test(word)) {
           result.month = m.month(word).month();
           return;
         }
@@ -64,18 +49,18 @@ export class NgxDateTimeService {
     if (null === result.year) {
       result.year = moment().year();
     }
-    if (! this.isLocaleMonthFirst) {
+    if (!NgxDateTimeParser.isLocaleMonthFirst()) {
       unusedNumbers.reverse();
     }
     unusedNumbers.forEach((n) => {
-     if (n >= 1 && n <= 12 && null === result.month) {
-       result.month = n - 1;
-     } else {
-       if (n >= 1 && n <= 31 && null === result.date) {
-         result.date = n;
-       }
-     }
-   });
+      if (n >= 1 && n <= 12 && null === result.month) {
+        result.month = n - 1;
+      } else {
+        if (n >= 1 && n <= 31 && null === result.date) {
+          result.date = n;
+        }
+      }
+    });
     if (null === result.month) {
       result.month = moment().month();
     }
@@ -88,9 +73,7 @@ export class NgxDateTimeService {
 
   }
 
-
-
-  parseTime(timeStr: string): TimeParseResult {
+  static parseTime(timeStr: string): ITimeParseResult {
     let rxResult: any;
     let meridian: string = null;
     if (/am/i.test(timeStr)) {
@@ -103,16 +86,15 @@ export class NgxDateTimeService {
     const rx = /\d{1,2}/g;
     const results = [];
 
-// tslint:disable-next-line: no-conditional-assignment
+    // tslint:disable-next-line: no-conditional-assignment
     while ((rxResult = rx.exec(timeStr)) !== null) {
       results.push(rxResult[0]);
     }
-    let hour = results[0] ?  parseInt(results[0], 10) : 0;
+    let hour = results[0] ? parseInt(results[0], 10) : 0;
     if ('pm' === meridian && hour < 12) {
       hour += 12;
     }
-    const minute = results[1] ?  parseInt(results[1], 10) : 0;
-    return {hour, minute};
+    const minute = results[1] ? parseInt(results[1], 10) : 0;
+    return { hour, minute };
   }
-
 }

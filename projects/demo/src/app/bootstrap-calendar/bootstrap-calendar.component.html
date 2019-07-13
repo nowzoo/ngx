@@ -8,7 +8,19 @@
   <h4>Calendar Control</h4>
   <div class="form-group">
     <label [attr.for]="id + 'date'">Date</label>
-    <ngx-bootstrap-calendar-control [inputId]="id + 'date'" [formControl]="fc"></ngx-bootstrap-calendar-control>
+    <ngx-bootstrap-calendar-control 
+      [inputId]="id + 'date'" 
+      [formControl]="fc"
+      [invalid]="fc.invalid"
+      [min]="min" 
+      [max]="max"></ngx-bootstrap-calendar-control>
+    <div class="invalid-feedback d-block" *ngIf="fc.hasError('minDate')">
+      That date is before the minimum date.
+    </div>
+    <div class="invalid-feedback d-block" *ngIf="fc.hasError('maxDate')">
+      That date is after the maximum date.
+    </div>
+    <pre>{{fc.errors | json}}</pre>
   </div>
 
   <h4>Basic Calendar</h4>

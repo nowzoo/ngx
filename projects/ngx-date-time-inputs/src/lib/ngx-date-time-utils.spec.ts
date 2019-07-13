@@ -1,9 +1,9 @@
 import { NgxDateTimeUtils } from './ngx-date-time-utils';
+import { FormControl } from '@angular/forms';
+import moment from 'moment';
 
 describe('NgxDateTimeUtils', () => {
-  it('should create an instance', () => {
-    expect(new NgxDateTimeUtils()).toBeTruthy();
-  });
+
 
   describe('calendarDays()', () => {
     it('should work for jan 2019', () => {
@@ -34,5 +34,9 @@ describe('NgxDateTimeUtils', () => {
       expect(weeks[0][2].disabled).toBe(false);
     });
   });
+
+
+
+
 });
 

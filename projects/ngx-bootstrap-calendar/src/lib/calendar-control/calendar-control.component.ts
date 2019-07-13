@@ -1,12 +1,10 @@
-import { Component, Input, ViewChild, forwardRef } from '@angular/core';
+import { Component, Input, forwardRef } from '@angular/core';
 import {
-  NgxAbstractInputComponent,
   NgxDateTimeService,
+  NgxDateTimeUtils,
   MODEL_DATE_FORMAT
 } from '@nowzoo/ngx-date-time-inputs';
-
-import { CalendarModalComponent } from '../calendar-modal/calendar-modal.component';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor, FormControl } from '@angular/forms';
 import moment from 'moment';
 
 @Component({
@@ -21,7 +19,10 @@ import moment from 'moment';
     }
   ]
 })
-export class CalendarControlComponent extends NgxAbstractInputComponent implements ControlValueAccessor {
+export class CalendarControlComponent  implements ControlValueAccessor {
+
+  private _control: FormControl = new FormControl('', { updateOn: 'blur' });
+  private _date: moment.Moment = moment();
 
   /**
    * The moment.js format to be displayed in the input box. Default `LL`.
@@ -62,46 +63,46 @@ export class CalendarControlComponent extends NgxAbstractInputComponent implemen
 
 
 
+  propagateChange: any = () => { };
+  propagateTouched: any = () => { };
+
 
   constructor(
-    svc: NgxDateTimeService
   ) {
-    super(svc);
+
+  }
+
+
+
+  get control(): FormControl {
+    return this._control;
+  }
+
+  get date(): moment.Moment {
+    return this._date;
+  }
+
+
+
+  registerOnChange(fn: (_: any) => void): void {
+    this.propagateChange = fn;
+  }
+  registerOnTouched(fn: any): void {
+    this.propagateTouched = fn;
   }
 
   get selectedDateForCal(): string {
     return this.date.format(MODEL_DATE_FORMAT);
   }
 
-  /**
-   * @ignore
-   * Calculate the input class based on validity.
-   */
-  get inputClass(): string {
-    const classes = ['form-control'];
-    if (this.invalid) {
-      classes.push('is-invalid');
-    }
-    return classes.join(' ');
-  }
 
 
-  /**
-   * @ignore
-   * Calculate the input group class
-   */
-  get inputGroupClass(): string {
-    const classes = ['input-group'];
-    if (this.boostrapSize) {
-      classes.push(`input-group-${this.boostrapSize}`);
-    }
-    return classes.join(' ');
-  }
+
+
 
 
 
   /**
-   * @ignore
    * Write control value.
    */
   writeValue(dateString: string) {
@@ -114,7 +115,7 @@ export class CalendarControlComponent extends NgxAbstractInputComponent implemen
    * Update the model. Used by the input when on change and blur.
    */
   handleInputChange() {
-    const d = this.dateService.parseDate(this.control.value);
+    const d = NgxDateTimeUtils.parseDate(this.control.value);
     this.date.year(d.year).month(d.month).date(d.date);
     const modelValue = this.date.format(MODEL_DATE_FORMAT);
     this.control.setValue(this.date.format(this.displayFormat));
@@ -131,4 +132,6 @@ export class CalendarControlComponent extends NgxAbstractInputComponent implemen
     this.propagateChange(modelValue);
     this.propagateTouched(modelValue);
   }
+
+
 }

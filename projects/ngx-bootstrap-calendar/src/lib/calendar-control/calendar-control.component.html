@@ -1,7 +1,10 @@
-<div [attr.class]="inputGroupClass">
+<div class="input-group"
+  [class.input-group-lg]="'lg'===bootstrapSize"
+  [class.input-group-sm]="'sm'===bootstrapSize">
   <input #input 
     [attr.id]="inputId" type="text" 
-    class="form-control" 
+    class="form-control"
+    [class.is-invalid]="invalid"
     [attr.placeholder]="inputPlaceholder"
     [attr.aria-label]="inputPlaceholder" 
     [formControl]="control" 

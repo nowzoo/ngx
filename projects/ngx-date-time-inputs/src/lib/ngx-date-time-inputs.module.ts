@@ -2,10 +2,9 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
 
-import { NgxDateTimeService } from './ngx-date-time.service';
-import { NgxDateInputComponent } from './ngx-date-input.component';
-import { NgxTimeInputComponent } from './ngx-time-input.component';
 import { CommonModule } from '@angular/common';
+import { DateControlComponent } from './date-control/date-control.component';
+import { TimeControlComponent } from './time-control/time-control.component';
 
 
 @NgModule({
@@ -15,14 +14,14 @@ import { CommonModule } from '@angular/common';
 
   ],
   declarations: [
-    NgxDateInputComponent,
-    NgxTimeInputComponent,
+    DateControlComponent,
+    TimeControlComponent,
   ],
   exports: [
-    NgxDateInputComponent,
-    NgxTimeInputComponent
+    DateControlComponent,
+    TimeControlComponent,
   ],
-  providers: [ NgxDateTimeService ]
+  providers: [  ]
 })
 export class NgxDateTimeInputsModule {
 

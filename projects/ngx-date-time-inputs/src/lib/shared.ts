@@ -11,3 +11,13 @@ export interface ICalendarDay {
   today: boolean;
   selected: boolean;
 }
+
+export interface IDateParseResult {
+  year: number;
+  month: number;
+  date: number;
+}
+export interface ITimeParseResult {
+  hour: number;
+  minute: number;
+}

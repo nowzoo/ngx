@@ -1,6 +1,6 @@
 # @nowzoo/ngx-date-time-inputs
 
-Simple date and time inputs. No calendars or fancy controls or polyfills. They just guess the date or time the user means. Forgiving and (more or less) locale-aware.
+Simple, extensible date and time controls and utilities. Forgiving and (more or less) locale-aware.
 
 
 ## Installation
@@ -39,32 +39,131 @@ now available for you to use:
   [(ngModel)]="time"></ngx-time-input>
 ```
 
-## Date Input API
-The component implements `ControlValueAccessor`. The model is a string in the format `YYYY-MM-DD`.
 
-Selector: `ngx-date-input`
+## Public API 
 
-Inputs
-- `displayFormat: string` The format for displaying the date in the input. See Moment's [formatting docs](https://momentjs.com/docs/#/displaying/format/).
-  Default: `'LL'` (e.g., September 4, 1986).
-- `inputPlaceholder: string` A string to be used as the input's placeholder attribute. Default: `'Enter a date'`
-- `inputId: string` A string to be used as the input's id.
-- `inputClass: string` A string to be used as the input's class. Pass any error classes here.
+### Constants
 
-## Time Input API
-The component implements `ControlValueAccessor`. The model is a string in the format `HH:mm` (24-hour time).
+- `const MODEL_DATE_FORMAT = 'YYYY-MM-DD'`  
+The format for dates. 
+- `const MODEL_TIME_FORMAT = 'HH:mm'`  
+The format for times.
 
-Selector: `ngx-time-input`
+### Interfaces
 
-Inputs
+**`interface IDateParseResult`**
+- `year: number`
+- `month: number`
+- `date: number`
 
-- `displayFormat: string` The format for displaying the date in the input. See Moment's [formatting docs](https://momentjs.com/docs/#/displaying/format/). Default: `'LT'` (time in the locale).
-- `inputPlaceholder: string` A string to be used as the input's placeholder attribute. Default: `'Enter a time'`
-- `inputId: string` A string to be used as the input's id.
-- `inputClass: string` A string to be used as the input's class. Pass any error classes here.
+**`interface ITimeParseResult`**
+- `hour: number`
+- `minute: number`
 
+
+### Classes
+
+**`class NgxDateTimeParser`**
+
+Static methods to "guess" dates and times from a variety of strings the user may input.
+
+- `static parseDate(dateStr: string): IDateParseResult`
+- `static parseTime(timeStr: string): ITimeParseResult`
+
+
+**`class NgxDateValidators`**
+
+Date control validation designed to work with `MODEL_DATE_FORMAT`; that is, both the control value and the min/max constraint are expected to be strings in the format `YYYY-MM-DD`.
+
+- `static minDate(min: string): ValidatorFn`  
+If the control value is a day before `min`, the function will return `{minDate: true}`
+
+- `static maxDate(min: string): ValidatorFn`  
+If the control value is a day after `max`, the function will return `{maxDate: true}`
+
+**`abstract class NgxAbstractDateControl implements ControlValueAccessor`**
+
+An abstract base class for a date control that 
+- accepts a variety of user inputs, 
+- "guesses" the date, 
+- normalizes the model value to `MODEL_DATE_FORMAT`, and 
+- sets the displayed input value to a format of your choosing.
+
+Note that the actual value of your control will always be in the format `MODEL_DATE_FORMAT` -- not the format displayed to the user. If the value you pass in cannot be parsed -- if it's not formatted to `MODEL_DATE_FORMAT` -- then the control value will be the current day.
+
+- `abstract displayFormat: string`  
+A Moment format, like `'LL'`. This is the format that will be displayed in the text box. Your implementation must set this.
+
+**`abstract class NgxAbstractTimeControl implements ControlValueAccessor`**
+
+An abstract base class for a time control that 
+- accepts a variety of user inputs, 
+- "guesses" the time, 
+- normalizes the model value to `MODEL_TIME_FORMAT`, and 
+- sets the displayed input value to a format of your choosing.
+
+Note that the actual value of your control will always be in the format `MODEL_TIME_FORMAT` -- not the format displayed to the user. If the value you pass in cannot be parsed -- if it's not formatted to `MODEL_TIME_FORMAT` -- then the control value will be set to the current time.
+
+- `abstract displayFormat: string`  
+A moment format, like `'LT'`. This is the format that will be displayed in the text box. Your implementation must set this.
+
+### Components
+
+**`DateControlComponent extends NgxAbstractDateControl`**
+
+An implementation of `NgxAbstractDateControl`.
+
+Selector: `ngx-date-control`
+
+Inputs:
+
+- `displayFormat: string`  
+The format that will be displayed to the user. See Moment's [formatting docs](https://momentjs.com/docs/#/displaying/format/). Default: `LL`
+- `inputClass: string`  
+The class to be applied to the text input. Pass any error classes here. Default: `form-control`.
+- `inputPlaceholder: string`  
+The placeholder to be applied to the text input. Default: `Enter date...`.
+- `inputId: string`  
+The id to be applied to the text input.
+
+**`TimeControlComponent extends NgxAbstractTimeControl`**
+
+An implementation of `NgxAbstractTimeControl`.
+
+Selector: `ngx-time-control`
+
+Inputs:
+
+- `displayFormat: string`  
+The format that will be displayed to the user. See Moment's [formatting docs](https://momentjs.com/docs/#/displaying/format/). Default: `LT`
+- `inputClass: string`  
+The class to be applied to the text input. Pass any error classes here. Default: `form-control`.
+- `inputPlaceholder: string`  
+The placeholder to be applied to the text input. Default: `Enter time...`.
+- `inputId: string`  
+The id to be applied to the text input.
 
 
 ## Development
 
-See the [README](https://github.com/nowzoo/ngx) at the root of the repo for info on installation and testing.
+Contributions are welcome. 
+
+```bash
+git clone https://github.com/nowzoo/ngx.git
+npm i
+```
+
+The library code is located in `projects/ngx-date-time`.
+
+To run tests:
+  - `ng test ngx-date-time`
+  - or use the `wallaby.js` file at `projects/ngx-date-time/wallaby.js`
+
+Build the library with `ng build ngx-date-time`.
+
+
+
+
+## License
+
+MIT
