@@ -1,7 +1,7 @@
 # @nowzoo/ngx-date-time
 
 Simple date and time controls and utilities. 
-- Extensible/
+- Extensible.
 - Forgiving of multiple date and time input formats.
 - (More or less) locale-aware.
 

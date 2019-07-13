@@ -1,6 +1,6 @@
 {
   "name": "@nowzoo/ngx-date-time",
-  "version": "8.0.2",
+  "version": "8.0.3",
   "description": "Simple, extensible date and time controls and utilities. Forgiving and (more or less) locale-aware.",
   "keywords": [
     "angular",
